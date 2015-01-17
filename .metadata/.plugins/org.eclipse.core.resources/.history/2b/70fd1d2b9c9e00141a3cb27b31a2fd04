@@ -1,0 +1,23 @@
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.parser.Parser;
+
+
+public class testjparser {
+
+	public static void main(String[] args) {
+		
+		Document doc = null;
+		try {
+			doc = Jsoup.connect("http://localhost:8080/version1").get();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} //gets all the html information from the page
+		
+		Parser.parse(doc.toString(),"http://localhost:8080/version1");
+	}
+
+}

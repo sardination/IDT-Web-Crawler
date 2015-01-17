@@ -1,0 +1,27 @@
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.parser.Parser;
+import org.jsoup.parser.XmlTreeBuilder;
+
+
+
+public class testjparser {
+
+	public static void main(String[] args) {
+		XmlTreeBuilder treebuilder = new XmlTreeBuilder();
+		Parser jparser = Parser.htmlParser();
+		
+		Document doc = nul;
+		try {
+			doc = Jsoup.connect("http://localhost:8080/version1").get();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} //gets all the html information from the page
+		
+		jparser.parse(doc.toString(),"http://localhost:8080/version1");
+	}
+
+}

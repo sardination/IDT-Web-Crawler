@@ -1,4 +1,7 @@
+import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 import org.jsoup.Jsoup;
@@ -6,6 +9,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+//getResponseCode for error
 
 public class RecursiveParser {
 	public static Page currentLocation;
@@ -35,14 +39,45 @@ public class RecursiveParser {
 		
 		Elements hrefs = doc.select("a[href]"); //gets all a tags with href
 		for (Element e:hrefs) {
+			System.out.println(e);
 			String appendToPath = e.attr("href");  //gets the href value from each a tag
 			ArrayList<Page> newRPRoute = currentLocation.getRoute();
 			newRPRoute.add(currentLocation);
-			Page newRPPage = new Page(currentLocation.getPathName()+"/"+appendToPath); //incorrect way to go to path
+			String newRPPath = currentLocation.getPathName();
+			boolean found = false;
+			String appendTo = "/"+appendToPath;
+			if (exists(newRPPath+appendTo)) {
+				found = true;
+			}
+			while (!found) {
+				newRPPath = newRPPath.substring(0,newRPPath.lastIndexOf("/"));
+				if (exists(newRPPath+appendTo)) {
+					found = true;
+				}
+			}
+			
+			Page newRPPage = new Page(newRPPath+appendTo);
 			newRPPage.setRoute(newRPRoute);
 			RecursiveParser rp = new RecursiveParser(newRPPage); //creates a new RecursiveParser for each href encountered
+			System.out.println("hi");
 			rp.parse();
 		}
 	}
+	
+	public static boolean exists(String URLName){
+	    try {
+	      HttpURLConnection.setFollowRedirects(false);
+	      // note : you may also need
+	      //        HttpURLConnection.setInstanceFollowRedirects(false)
+	      HttpURLConnection con =
+	         (HttpURLConnection) new URL(URLName).openConnection();
+	      con.setRequestMethod("HEAD");
+	      return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
+	    }
+	    catch (Exception e) {
+	       e.printStackTrace();
+	       return false;
+	    }
+	  }  
 
 }

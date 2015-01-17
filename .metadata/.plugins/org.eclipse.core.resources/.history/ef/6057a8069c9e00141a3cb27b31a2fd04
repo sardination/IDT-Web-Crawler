@@ -1,0 +1,18 @@
+import org.jsoup.Jsoup;
+import org.jsoup.parser.Parser;
+import org.jsoup.parser.XmlTreeBuilder;
+
+
+
+public class testjparser {
+
+	public static void main(String[] args) {
+		XmlTreeBuilder treebuilder = new XmlTreeBuilder();
+		Parser jparser = Parser.htmlParser();
+		
+		Document doc = Jsoup.connect("http://localhost:8080/version1").get(); //gets all the html information from the page
+		
+		jparser.parse(,"http://localhost:8080/version1")
+	}
+
+}
