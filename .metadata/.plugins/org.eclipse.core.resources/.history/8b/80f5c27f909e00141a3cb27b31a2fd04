@@ -1,0 +1,31 @@
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+
+public class parser {
+	public String currentLocation = "";
+	
+	public parser (String currLoc) {
+		this.currentLocation = currLoc;
+	}
+
+	public static void main(String[] args) {
+		Document doc = null;
+		
+		String currentLocation = "";
+		
+		try {
+			doc = Jsoup.connect("http://localhost:8080/version1").get();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String html = doc.toString();
+		
+
+	}
+
+}

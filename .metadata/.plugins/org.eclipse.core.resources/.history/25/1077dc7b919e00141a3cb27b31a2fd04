@@ -1,0 +1,12 @@
+
+public class Page {
+	
+	private String path;
+	private boolean live;
+	private String errorType;
+	
+	public Page (String path) {
+		
+	}
+
+}

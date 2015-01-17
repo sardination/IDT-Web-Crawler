@@ -1,0 +1,13 @@
+
+public class Page {
+	
+	private String path;
+	private ArrayList<String> pathway = new ArrayList<String>
+	private boolean live;
+	private String errorType;
+	
+	public Page (String path) {
+		
+	}
+
+}

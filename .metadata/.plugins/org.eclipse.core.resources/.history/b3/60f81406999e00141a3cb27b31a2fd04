@@ -1,0 +1,44 @@
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+
+public class RecursiveParser {
+	public static Page currentLocation;
+	
+	public RecursiveParser (Page currentPage) {
+		this.currentLocation = currentPage;
+	}
+
+	public static void main(String[] args) {
+		Document doc = null;
+		
+		currentLocation = new Page("http://localhost:8080/version1"); //the page the parser is currently on
+		currentLocation.setRoute(new ArrayList<Page>()); 
+		
+		try {
+			doc = Jsoup.connect("http://localhost:8080/version1").get();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(currentLocation.getPathName());
+		
+		Elements hrefs = doc.select("a[href]");
+		for (Element e :hrefs) {
+			String appendToPath = e.attr("href");
+			ArrayList<Page> newRPRoute = currentLocation.getRoute();
+			newRPRoute.add(currentLocation);
+			Page newRPPage = new Page(currentLocation.getPathName()+"/"+appendToPath);
+			newRPPage.setRoute(newRPRoute);
+			RecursiveParser rp = new RecursiveParser(new Page(currentLocation.getPathName()+"/"+appendToPath));
+		}
+
+	}
+
+}

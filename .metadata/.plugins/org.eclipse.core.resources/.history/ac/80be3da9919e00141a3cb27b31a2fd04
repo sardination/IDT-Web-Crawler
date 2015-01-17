@@ -1,0 +1,15 @@
+import java.util.ArrayList;
+
+
+public class Page {
+	
+	private String path;
+	private ArrayList<String> route = new ArrayList<String>();
+	private boolean live;
+	private String errorType;
+	
+	public Page (String path) {
+		
+	}
+
+}

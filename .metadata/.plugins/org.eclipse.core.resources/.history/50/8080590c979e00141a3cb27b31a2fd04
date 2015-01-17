@@ -1,0 +1,25 @@
+import java.util.ArrayList;
+
+
+public class Page {
+	
+	private String path;
+	private ArrayList<Page> route = new ArrayList<Page>();
+	private boolean live;
+	private String errorType;
+	
+	public Page (String pathName) {
+		this.path = pathName;
+		this.route = route;
+		this.route.add(this);
+	}
+	
+	public String getPathName() {
+		return path;
+	}
+	
+	public void addToOldRoute(ArrayList<Page> oldRoute, Page pageToAdd) {
+		
+	}
+
+}

@@ -1,0 +1,6 @@
+
+public class Page {
+	
+	public Page (String path, boolean live) {
+
+}

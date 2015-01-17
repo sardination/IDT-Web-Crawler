@@ -1,0 +1,38 @@
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+
+public class Parser {
+	public String currentLocation = "";
+	
+	public Parser (String currLoc) {
+		this.currentLocation = currLoc;
+	}
+
+	public static void main(String[] args) {
+		Document doc = null;
+		
+		ArrayList<Page> origPathway = new ArrayList<Page>();
+		Page currentPage = new Page("http://localhost:8080/version1", origPathway);
+		
+		try {
+			doc = Jsoup.connect("http://localhost:8080/version1").get();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String html = doc.toString();
+		String appendToPath = "";
+		for (String s:html.split("\n")) {
+			if (s.substring(0,3).equals("</a>")) {
+				appendToPath = s.
+			}
+		}
+
+	}
+
+}
