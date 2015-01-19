@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -10,9 +11,15 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 //getResponseCode for error
+//making a graph with nodes and paths :3
 
 public class RecursiveParser {
 	public static Page currentLocation;
+	public static ArrayList<ArrayList<Boolean>> graph = new ArrayList<ArrayList<Boolean>>(); 
+		//graph.get(a).get(b) checks the path from nodes.get(a) to nodes.get(b)
+	public static ArrayList<ArrayList<String>> linkTexts = new ArrayList<ArrayList<String>>();
+	public static ArrayList<Page> nodes = new ArrayList<Page>();
+	public static ArrayList<String> nodeNames = new ArrayList<String>();
 	
 	public RecursiveParser (Page currentPage) {
 		this.currentLocation = currentPage;
@@ -20,63 +27,93 @@ public class RecursiveParser {
 
 	public static void main(String[] args) {
 		
-		currentLocation = new Page("http://localhost:8080/version1"); //the page the parser is currently on
-		currentLocation.setRoute(new ArrayList<Page>()); //sets original route to nothing (root page)
+		parse("http://localhost:8080/version1/index.html"); //default test value for now
+		for (Page p:nodes) {
+			System.out.println(p);
+		}
 		
-		parse();
+		for (int i=0; i<graph.size(); i++) {
+			for (int j=0; j<graph.get(i).size(); j++) {
+				System.out.print(linkTexts.get(i).get(j)+": "+graph.get(i).get(j)+"  ");
+			}
+			System.out.println();
+		}
 
 	}
 	
-	public static void parse() {
+	public static void parse(String url) {
+		
+		currentLocation = new Page(url); //the page the parser is currently on
+		//somehow check if they're in the root and don't force them to input index.html
+		currentLocation.setRoute(new ArrayList<Page>()); //sets original route to nothing (root page)
+		
 		Document doc = null;
+		
+		boolean go = true;
 		
 		try {
 			doc = Jsoup.connect(currentLocation.getPathName()).get(); //gets all the html information from the page
 		} catch (IOException e) {
-			e.printStackTrace();
+			//print a notice saying that the link is unreachable 
+			//e.printStackTrace();
+			go = false;
 		}
 		
-		Elements hrefs = doc.select("a[href]"); //gets all a tags with href
-		for (Element e:hrefs) {
-			String appendToPath = e.attr("href");  //gets the href value from each a tag
-			ArrayList<Page> newRPRoute = currentLocation.getRoute();
-			newRPRoute.add(currentLocation);
-			String newRPPath = currentLocation.getPathName();
-			boolean found = false;
-			String appendTo = "/"+appendToPath;
-			if (exists(newRPPath+appendTo)) {
-				found = true;
+		if (go) {
+			if (nodes.size()==0) {
+				nodes.add(currentLocation);
+				nodeNames.add(currentLocation.getPathName());
+				graph.add(new ArrayList<Boolean>());
+				graph.get(0).add(false);
+				linkTexts.add(new ArrayList<String>());
+				linkTexts.get(0).add("");
 			}
-			while (!found) {
-				newRPPath = newRPPath.substring(0,newRPPath.lastIndexOf("/"));
-				if (exists(newRPPath+appendTo)) {
-					found = true;
+			
+			Elements hrefs = doc.select("a[href]"); //gets all a tags with href
+			for (Element e:hrefs) {
+				String appendToPath = e.attr("href");  //gets the href value from each a tag
+				String newRPPath = currentLocation.getPathName();
+				//boolean found = false;
+				String appendTo = "/"+appendToPath;
+				newRPPath = newRPPath.substring(0,newRPPath.lastIndexOf("/"))+appendTo;
+				
+				if (!nodeNames.contains(newRPPath)) {
+					Page newRPPage = new Page(newRPPath);
+					nodeNames.add(newRPPath);
+					nodes.add(newRPPage);
+					for (int i=0; i<graph.size(); i++) {
+						graph.get(i).add(false);
+						linkTexts.get(i).add("");
+					}
+					graph.add(new ArrayList<Boolean>());
+					linkTexts.add(new ArrayList<String>());
+					for (int i=0; i<graph.size(); i++) {
+						graph.get(graph.size()-1).add(false);
+						linkTexts.get(graph.size()-1).add("");
+					}
 				}
+				int node1loc = nodeNames.indexOf(currentLocation.getPathName());
+				int node2loc = nodeNames.indexOf(newRPPath);
+				if (!graph.get(node1loc).get(node2loc)) {
+					graph.get(node1loc).set(node2loc, true);
+					linkTexts.get(node1loc).set(node2loc, e.text());
+					parse(newRPPath);
+				}
+				
+				/*
+				if (!currentLocation.getRoute().contains(newRPPath+appendTo)) {
+					Page newRPPage = new Page(newRPPath+appendTo);
+					newRPPage.setRoute(newRPRoute);
+					RecursiveParser rp = new RecursiveParser(newRPPage); //creates a new RecursiveParser for each href encountered
+					System.out.println(currentLocation.getPathName()+" "+e+" "+newRPPath+appendTo);
+					rp.parse();
+					
+				}
+				*/
 			}
-			if (!currentLocation.getRoute().contains(newRPPath+appendTo)) {
-				Page newRPPage = new Page(newRPPath+appendTo);
-				newRPPage.setRoute(newRPRoute);
-				RecursiveParser rp = new RecursiveParser(newRPPage); //creates a new RecursiveParser for each href encountered
-				System.out.println(currentLocation.getPathName()+" "+e+" "+newRPPath+appendTo);
-				rp.parse();
-			}
+		
 		}
 	}
-	
-	public static boolean exists(String URLName){
-	    try {
-	      HttpURLConnection.setFollowRedirects(false);
-	      // note : you may also need
-	      //        HttpURLConnection.setInstanceFollowRedirects(false)
-	      HttpURLConnection con =
-	         (HttpURLConnection) new URL(URLName).openConnection();
-	      con.setRequestMethod("HEAD");
-	      return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
-	    }
-	    catch (Exception e) {
-	       e.printStackTrace();
-	       return false;
-	    }
-	  }  
+ 
 
 }

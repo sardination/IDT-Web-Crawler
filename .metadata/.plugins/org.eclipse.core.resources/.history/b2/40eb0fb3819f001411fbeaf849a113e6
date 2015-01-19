@@ -1,0 +1,27 @@
+import java.util.ArrayList;
+
+
+public class Page {
+	
+	private String path;
+	private ArrayList<Page> route = new ArrayList<Page>();
+	private boolean live;
+	private String errorType;
+	
+	public Page (String pathName) {
+		this.path = pathName;
+	}
+	
+	public String getPathName() {
+		return path;
+	}
+	
+	public ArrayList<Page> getRoute() {
+		return route;
+	}
+	
+	public void setRoute(ArrayList<Page> route) {
+		this.route = route;
+	}
+
+}

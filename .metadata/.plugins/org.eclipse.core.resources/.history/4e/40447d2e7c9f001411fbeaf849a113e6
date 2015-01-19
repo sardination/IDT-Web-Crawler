@@ -1,0 +1,10 @@
+
+public class Edge {
+	private Page node1;
+	private Page node2;
+	
+	public Edge(n1,n2) {
+		
+	}
+
+}

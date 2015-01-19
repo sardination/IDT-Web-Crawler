@@ -1,0 +1,6 @@
+
+public class Edge {
+	private Page node1;
+	private Page node2;
+
+}

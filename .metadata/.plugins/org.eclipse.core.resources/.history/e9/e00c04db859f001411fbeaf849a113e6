@@ -1,0 +1,113 @@
+import java.io.File;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+//getResponseCode for error
+//making a graph with nodes and paths :3
+
+public class RecursiveParser {
+	public static Page currentLocation;
+	public static ArrayList<ArrayList<Boolean>> graph = new ArrayList<ArrayList<Boolean>>(); 
+		//graph.get(a).get(b) checks the path from nodes.get(a) to nodes.get(b)
+	public static ArrayList<Page> nodes = new ArrayList<Page>();
+	public static ArrayList<String> nodeNames = new ArrayList<String>();
+	
+	public RecursiveParser (Page currentPage) {
+		this.currentLocation = currentPage;
+	}
+
+	public static void main(String[] args) {
+		
+		parse("http://localhost:8080/version1/index.html");
+		for (Page p:nodes) {
+			System.out.println(p);
+		}
+		for (ArrayList<Boolean> a:graph) {
+			for (Boolean b:a) {
+				System.out.print(b+" ");
+			}
+			System.out.println();
+		}
+
+	}
+	
+	public static void parse(String url) {
+		
+		currentLocation = new Page(url); //the page the parser is currently on
+		//somehow check if they're in the root and don't force them to input index.html
+		currentLocation.setRoute(new ArrayList<Page>()); //sets original route to nothing (root page)
+		
+		Document doc = null;
+		
+		try {
+			doc = Jsoup.connect(currentLocation.getPathName()).get(); //gets all the html information from the page
+		} catch (IOException e) {
+			//print a notice saying that the link is unreachable 
+			e.printStackTrace();
+		}
+		
+		nodes.add(currentLocation);
+		nodeNames.add(currentLocation.getPathName());
+		graph.add(new ArrayList<Boolean>());
+		graph.get(0).add(false);
+		
+		Elements hrefs = doc.select("a[href]"); //gets all a tags with href
+		for (Element e:hrefs) {
+			String appendToPath = e.attr("href");  //gets the href value from each a tag
+			String newRPPath = currentLocation.getPathName();
+			//boolean found = false;
+			String appendTo = "/"+appendToPath;
+			newRPPath = newRPPath.substring(0,newRPPath.lastIndexOf("/"))+appendTo;
+			
+			if (!nodeNames.contains(newRPPath)) {
+				Page newRPPage = new Page(newRPPath);
+				nodeNames.add(newRPPath);
+				nodes.add(newRPPage);
+				for (ArrayList<Boolean> a:graph) {
+					a.add(false);
+					System.out.print("a"+a.size()+" ");
+				}
+				graph.add(new ArrayList<Boolean>());
+				for (int i=0; i<graph.size(); i++) {
+					graph.get(graph.size()-1).add(false);
+				}
+				System.out.println();
+				System.out.println(graph.size());
+			}
+			int node1loc = nodeNames.indexOf(currentLocation.getPathName());
+			int node2loc = nodeNames.indexOf(newRPPath);
+			System.out.println(node1loc+" "+node2loc);
+			System.out.println(nodes.get(node1loc).getPathName()+" "+nodes.get(node2loc).getPathName());
+			if (!graph.get(node1loc).get(node2loc)) {
+				graph.get(node1loc).set(node2loc, true);
+				for (ArrayList<Boolean> a:graph) {
+					System.out.print("b"+a.size()+" ");
+				}
+				System.out.println();
+				System.out.println(graph.size());
+				parse(newRPPath);
+			}
+			
+			/*
+			if (!currentLocation.getRoute().contains(newRPPath+appendTo)) {
+				Page newRPPage = new Page(newRPPath+appendTo);
+				newRPPage.setRoute(newRPRoute);
+				RecursiveParser rp = new RecursiveParser(newRPPage); //creates a new RecursiveParser for each href encountered
+				System.out.println(currentLocation.getPathName()+" "+e+" "+newRPPath+appendTo);
+				rp.parse();
+				
+			}
+			*/
+		}
+	}
+ 
+
+}
