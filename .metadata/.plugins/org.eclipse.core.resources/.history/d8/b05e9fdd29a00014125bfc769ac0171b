@@ -95,12 +95,10 @@ public class RecursiveParser {
 				if (appendToPath.length()>=7 && appendToPath.substring(0,7).equals("http://")) {
 					newRPPath = appendToPath;
 				} else if (appendToPath.length()>=3 && appendToPath.substring(0,3).equals("../")){
-					newRPPath = newRPPath.substring(0,newRPPath.lastIndexOf("/"));
 					while (appendToPath.length()>=3 && appendToPath.substring(0,3).equals("../")) {
 						appendToPath = appendToPath.substring(3,appendToPath.length());
-						newRPPath = newRPPath.substring(0,newRPPath.lastIndexOf("/"));
 					}
-					newRPPath += "/"+appendToPath;
+					newRPPath += appendToPath;
 				} else {
 					String appendTo = "/"+appendToPath;
 					newRPPath = newRPPath.substring(0,newRPPath.lastIndexOf("/"))+appendTo;

@@ -23,7 +23,7 @@ public class RecursiveParser {
 
 	public static void main(String[] args) {
 		
-		parseATags("http://doodlygreetings.com/"); //default test value for now
+		parseATags("http://localhost:8080/version1"); //default test value for now
 		
 		for (Page p:nodes) {
 			System.out.println(p);
@@ -92,15 +92,8 @@ public class RecursiveParser {
 				String newRPPath = currentLocation.getPathName();
 				//boolean found = false;
 				
-				if (appendToPath.length()>=7 && appendToPath.substring(0,7).equals("http://")) {
+				if (appendToPath.length()>7 && appendToPath.substring(0,7).equals("http://")) {
 					newRPPath = appendToPath;
-				} else if (appendToPath.length()>=3 && appendToPath.substring(0,3).equals("../")){
-					newRPPath = newRPPath.substring(0,newRPPath.lastIndexOf("/"));
-					while (appendToPath.length()>=3 && appendToPath.substring(0,3).equals("../")) {
-						appendToPath = appendToPath.substring(3,appendToPath.length());
-						newRPPath = newRPPath.substring(0,newRPPath.lastIndexOf("/"));
-					}
-					newRPPath += "/"+appendToPath;
 				} else {
 					String appendTo = "/"+appendToPath;
 					newRPPath = newRPPath.substring(0,newRPPath.lastIndexOf("/"))+appendTo;
@@ -139,10 +132,6 @@ public class RecursiveParser {
 			}
 		
 		}
-	}
-	
-	public static void parseUserInputs(String url) {
-		
 	}
  
 

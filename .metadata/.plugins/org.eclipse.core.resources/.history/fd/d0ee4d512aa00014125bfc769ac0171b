@@ -100,7 +100,7 @@ public class RecursiveParser {
 						appendToPath = appendToPath.substring(3,appendToPath.length());
 						newRPPath = newRPPath.substring(0,newRPPath.lastIndexOf("/"));
 					}
-					newRPPath += "/"+appendToPath;
+					newRPPath += appendToPath;
 				} else {
 					String appendTo = "/"+appendToPath;
 					newRPPath = newRPPath.substring(0,newRPPath.lastIndexOf("/"))+appendTo;
