@@ -1,0 +1,13 @@
+
+public class test {
+
+	public static void main(String[] args) {
+		rec(100);
+
+	}
+	
+	public static void rec(int i) {
+		rec(i-1);
+	}
+
+}

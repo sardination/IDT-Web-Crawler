@@ -60,7 +60,9 @@ public class RecursiveParser {
 			}
 		}
 		
-		Page currentLocation = new Page(url); //the page the parser is currently on
+		public Page currentLocation;
+		
+		currentLocation = new Page(url); //the page the parser is currently on
 		//somehow check if they're in the root and don't force them to input index.html
 		currentLocation.setRoute(new ArrayList<Page>()); //sets original route to nothing (root page)
 				
@@ -122,6 +124,9 @@ public class RecursiveParser {
 				if (!graph.get(node1loc).get(node2loc)) {
 					graph.get(node1loc).set(node2loc, true);
 					linkTexts.get(node1loc).set(node2loc, e.text());
+					System.out.println(currentLocation);
+					for (Element el:hrefs) System.out.print(el+" * ");
+					System.out.println();
 					System.out.println(node1loc+": "+currentLocation.getPathName()+"  -"+e.text()+"->  "+node2loc+": "+newRPPath);
 					System.out.println();
 					if (!contains) {
@@ -130,6 +135,8 @@ public class RecursiveParser {
 				}
 				
 			}
+			System.out.println(currentLocation+" doneeeeeeeeeeeee");
+			System.out.println();
 		
 		}
 	}

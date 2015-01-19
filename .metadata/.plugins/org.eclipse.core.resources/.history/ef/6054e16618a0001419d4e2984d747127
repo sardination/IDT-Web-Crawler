@@ -14,12 +14,16 @@ import org.jsoup.select.Elements;
 //making a graph with nodes and paths :3
 
 public class RecursiveParser {
+	public static Page currentLocation;
 	public static ArrayList<ArrayList<Boolean>> graph = new ArrayList<ArrayList<Boolean>>(); 
 		//graph.get(a).get(b) checks the path from nodes.get(a) to nodes.get(b)
 	public static ArrayList<ArrayList<String>> linkTexts = new ArrayList<ArrayList<String>>();
 	public static ArrayList<Page> nodes = new ArrayList<Page>();
 	public static ArrayList<String> nodeNames = new ArrayList<String>();
 	
+	public RecursiveParser (Page currentPage) {
+		this.currentLocation = currentPage;
+	}
 
 	public static void main(String[] args) {
 		
@@ -60,10 +64,11 @@ public class RecursiveParser {
 			}
 		}
 		
-		Page currentLocation = new Page(url); //the page the parser is currently on
+
+		currentLocation = new Page(url); //the page the parser is currently on
 		//somehow check if they're in the root and don't force them to input index.html
 		currentLocation.setRoute(new ArrayList<Page>()); //sets original route to nothing (root page)
-				
+		
 		Document doc = null;
 		
 		boolean go = true;
@@ -102,7 +107,6 @@ public class RecursiveParser {
 				boolean contains = true;
 				
 				if (!nodeNames.contains(newRPPath)) {
-					contains = false;
 					Page newRPPage = new Page(newRPPath);
 					nodeNames.add(newRPPath);
 					nodes.add(newRPPage);
@@ -123,8 +127,7 @@ public class RecursiveParser {
 					graph.get(node1loc).set(node2loc, true);
 					linkTexts.get(node1loc).set(node2loc, e.text());
 					System.out.println(node1loc+": "+currentLocation.getPathName()+"  -"+e.text()+"->  "+node2loc+": "+newRPPath);
-					System.out.println();
-					if (!contains) {
+					if (!nodeNames.contains(newRPPath)) {
 						parse(newRPPath);
 					}
 				}

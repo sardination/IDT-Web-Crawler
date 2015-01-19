@@ -1,0 +1,17 @@
+
+public class test {
+
+	public static void main(String[] args) {
+		rec(100);
+
+	}
+	
+	public static void rec(int i) {
+		String s = String.valueOf(i);
+		if (i!=0) {
+			rec(i-1);
+		}
+		System.out.println(i);
+	}
+
+}

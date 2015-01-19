@@ -1,0 +1,16 @@
+
+public class test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	public static void rec() {
+		int i=100;
+		while (i!=0) {
+			
+		}
+	}
+
+}

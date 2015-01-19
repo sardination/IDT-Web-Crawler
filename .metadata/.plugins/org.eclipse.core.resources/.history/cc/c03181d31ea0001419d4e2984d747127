@@ -122,8 +122,6 @@ public class RecursiveParser {
 				if (!graph.get(node1loc).get(node2loc)) {
 					graph.get(node1loc).set(node2loc, true);
 					linkTexts.get(node1loc).set(node2loc, e.text());
-					System.out.println(node1loc+": "+currentLocation.getPathName()+"  -"+e.text()+"->  "+node2loc+": "+newRPPath);
-					System.out.println();
 					if (!contains) {
 						parse(newRPPath);
 					}
