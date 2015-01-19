@@ -27,8 +27,7 @@ public class RecursiveParser {
 
 	public static void main(String[] args) {
 		
-		parse("http://localhost:8080/version1/index.html"); //default test value for now
-		
+		parse("http://localhost:8080/version3/index.html"); //default test value for now
 		for (Page p:nodes) {
 			System.out.println(p);
 		}
@@ -101,6 +100,16 @@ public class RecursiveParser {
 					parse(newRPPath);
 				}
 				
+				/*
+				if (!currentLocation.getRoute().contains(newRPPath+appendTo)) {
+					Page newRPPage = new Page(newRPPath+appendTo);
+					newRPPage.setRoute(newRPRoute);
+					RecursiveParser rp = new RecursiveParser(newRPPage); //creates a new RecursiveParser for each href encountered
+					System.out.println(currentLocation.getPathName()+" "+e+" "+newRPPath+appendTo);
+					rp.parse();
+					
+				}
+				*/
 			}
 		
 		}

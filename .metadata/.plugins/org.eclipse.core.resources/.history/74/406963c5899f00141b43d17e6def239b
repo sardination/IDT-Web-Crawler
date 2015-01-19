@@ -28,7 +28,6 @@ public class RecursiveParser {
 	public static void main(String[] args) {
 		
 		parse("http://localhost:8080/version1/index.html"); //default test value for now
-		
 		for (Page p:nodes) {
 			System.out.println(p);
 		}
