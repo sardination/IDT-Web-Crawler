@@ -33,6 +33,7 @@ public class RecursiveParser {
 		try {
 			doc = Jsoup.connect(currentLocation.getPathName()).get(); //gets all the html information from the page
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -53,13 +54,12 @@ public class RecursiveParser {
 					found = true;
 				}
 			}
-			if (!currentLocation.getRoute().contains(newRPPath+appendTo)) {
-				Page newRPPage = new Page(newRPPath+appendTo);
-				newRPPage.setRoute(newRPRoute);
-				RecursiveParser rp = new RecursiveParser(newRPPage); //creates a new RecursiveParser for each href encountered
-				System.out.println(currentLocation.getPathName()+" "+e+" "+newRPPath+appendTo);
-				rp.parse();
-			}
+			if (currentLocation.getRoute().contains(newRPPath+appendTo));
+			Page newRPPage = new Page(newRPPath+appendTo);
+			newRPPage.setRoute(newRPRoute);
+			RecursiveParser rp = new RecursiveParser(newRPPage); //creates a new RecursiveParser for each href encountered
+			System.out.println(e);
+			rp.parse();
 		}
 	}
 	

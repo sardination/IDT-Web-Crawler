@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.jsoup.select.Elements"/>
+<fullyQualifiedTypeName name="org.jsoup.nodes.Element"/>
+<fullyQualifiedTypeName name="org.jsoup.parser.Parser"/>
+<fullyQualifiedTypeName name="org.jsoup.nodes.Document"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.net.HttpURLConnection"/>
+<fullyQualifiedTypeName name="java.net.URL"/>
+</qualifiedTypeNameHistroy>

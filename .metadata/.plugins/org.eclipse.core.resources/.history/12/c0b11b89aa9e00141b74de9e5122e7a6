@@ -33,6 +33,7 @@ public class RecursiveParser {
 		try {
 			doc = Jsoup.connect(currentLocation.getPathName()).get(); //gets all the html information from the page
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
