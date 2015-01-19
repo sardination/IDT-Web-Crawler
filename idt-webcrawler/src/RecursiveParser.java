@@ -27,7 +27,7 @@ public class RecursiveParser {
 
 	public static void main(String[] args) {
 		
-		parse("http://localhost:8080/version1/index.html"); //default test value for now
+		parse("http://localhost:8080/version1"); //default test value for now
 		
 		for (Page p:nodes) {
 			System.out.println(p);
@@ -44,6 +44,26 @@ public class RecursiveParser {
 	
 	public static void parse(String url) {
 		
+		if (url.length()>=1 && !url.substring(0,url.length()-1).equals("/")) {
+			HttpURLConnection con;
+			try {
+				con = (HttpURLConnection) new URL(url+"/index.html").openConnection();
+		 	      con.setRequestMethod("HEAD");
+		 	      if (con.getResponseCode() != 404) {
+		 	    	  url = url+"/index.html";
+		 	      }
+			} catch (MalformedURLException e) {
+				System.out.println("m");
+				//System.out.println("m");
+				//e.printStackTrace();
+			} catch (IOException e) {
+				System.out.println("e");
+				//System.out.println("i");
+				//e.printStackTrace();
+			}
+		}
+		
+
 		currentLocation = new Page(url); //the page the parser is currently on
 		//somehow check if they're in the root and don't force them to input index.html
 		currentLocation.setRoute(new ArrayList<Page>()); //sets original route to nothing (root page)
@@ -75,8 +95,13 @@ public class RecursiveParser {
 				String appendToPath = e.attr("href");  //gets the href value from each a tag
 				String newRPPath = currentLocation.getPathName();
 				//boolean found = false;
-				String appendTo = "/"+appendToPath;
-				newRPPath = newRPPath.substring(0,newRPPath.lastIndexOf("/"))+appendTo;
+				
+				if (appendToPath.length()>7 && appendToPath.substring(0,7).equals("http://")) {
+					newRPPath = appendToPath;
+				} else {
+					String appendTo = "/"+appendToPath;
+					newRPPath = newRPPath.substring(0,newRPPath.lastIndexOf("/"))+appendTo;
+				}
 				
 				if (!nodeNames.contains(newRPPath)) {
 					Page newRPPage = new Page(newRPPath);
