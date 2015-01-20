@@ -1,9 +1,9 @@
-import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,38 +17,99 @@ public class RecursiveParser {
 	public static ArrayList<ArrayList<Boolean>> graph = new ArrayList<ArrayList<Boolean>>(); 
 		//graph.get(a).get(b) checks the path from nodes.get(a) to nodes.get(b)
 	public static ArrayList<ArrayList<String>> linkTexts = new ArrayList<ArrayList<String>>();
+	public static ArrayList<ArrayList<Object>> fullTags = new ArrayList<ArrayList<Object>>();
 	public static ArrayList<Page> nodes = new ArrayList<Page>();
 	public static ArrayList<String> nodeNames = new ArrayList<String>();
 	
 
 	public static void main(String[] args) {
 		
-		parseATags("http://doodlygreetings.com/"); //default test value for now
+		Scanner sc = new Scanner(System.in);
+		
+		parseATags("http://localhost:8080/version1/"); //default test value for now
+		
 		
 		for (Page p:nodes) {
 			System.out.println(p);
 		}
+		System.out.println();
 		
 		for (int i=0; i<graph.size(); i++) {
 			for (int j=0; j<graph.get(i).size(); j++) {
-				System.out.print(linkTexts.get(i).get(j)+": "+graph.get(i).get(j)+"     ");
-			}
-			System.out.println();
-			System.out.println();
-		}
+				if (graph.get(i).get(j)) {
+					System.out.println(nodes.get(i).getPathName()+" -- "+linkTexts.get(i).get(j)+" --> "+nodes.get(j).getPathName());
+					String addition = "";
+					if (nodes.get(j).getResponseCode() != 200) {
+						addition = " "+nodes.get(j).getPathName() +" has error ID "+nodes.get(j).getResponseCode()+".";
+					}
+					System.out.println("Is this the page you want this link to lead to?"+addition+" (Y/N)");
+					String ans = sc.nextLine();
+					if (ans.equalsIgnoreCase("N")) {
+						System.out.println("Which valid page would you like this link to lead to? Please enter the number.");
+						int num = 1;
+						int[] numsOfNodes = new int[nodes.size()];
+						for (int k=0; k<nodeNames.size(); k++) {
+							if (nodes.get(k).getResponseCode()==200) {
+								numsOfNodes[num] = k;
+								System.out.println(num+". "+nodeNames.get(k));
+								num++;
+							}
+						}
+						System.out.println(num+". Other");
+						int pageNum = Integer.parseInt(sc.nextLine());
+						String newPagePath = "";
+						if (pageNum==num) {
+							newPagePath = sc.nextLine();
+						} else if (pageNum!=0 && pageNum<num){
+							newPagePath = nodeNames.get(numsOfNodes[pageNum]);
+						}
 
+						String common = "";
+						for (int m=1; m<=Math.min(newPagePath.length(), nodeNames.get(i).length()); m++) {
+							if (newPagePath.substring(0,m).equals(nodeNames.get(i).substring(0,m))) {
+								common = newPagePath.substring(0,m);
+							} else {
+								break;
+							}
+						}
+						
+						if (common.length()<newPagePath.length()) {
+							newPagePath = newPagePath.replaceFirst(common, "");
+						}
+						
+						Element replacementTag = (Element)fullTags.get(i).get(j);
+						
+						System.out.println("It is suggested that you replace this tag: "+fullTags.get(i).get(j));
+						System.out.println("with this tag: "+replacementTag.attr("href",newPagePath));
+						System.out.println();
+					}
+				}
+			}
+		}
+		
+		parseInputs(nodes.get(0));
+		
+		sc.close();
 	}
 	
 	public static void parseATags(String url) {
 		
-		if (url.length()>=1 && !url.substring(0,url.length()-1).equals("/")) {
+		if (url.length()>=1) {
 			HttpURLConnection con;
 			try {
-				con = (HttpURLConnection) new URL(url+"/index.html").openConnection();
-		 	      con.setRequestMethod("HEAD");
-		 	      if (con.getResponseCode() != 404) {
-		 	    	  url = url+"/index.html";
-		 	      }
+				if (!url.substring(url.length()-1,url.length()).equals("/")) {
+					con = (HttpURLConnection) new URL(url+"/index.html").openConnection();
+			 	      con.setRequestMethod("HEAD");
+			 	      if (con.getResponseCode() != 404) {
+			 	    	  url = url+"/index.html";
+			 	      }
+				} else {
+					con = (HttpURLConnection) new URL(url+"index.html").openConnection();
+			 	      con.setRequestMethod("HEAD");
+			 	      if (con.getResponseCode() != 404) {
+			 	    	  url = url+"index.html";
+			 	      }
+				}
 			} catch (MalformedURLException e) {
 				System.out.println("m");
 				//System.out.println("m");
@@ -84,6 +145,8 @@ public class RecursiveParser {
 				graph.get(0).add(false);
 				linkTexts.add(new ArrayList<String>());
 				linkTexts.get(0).add("");
+				fullTags.add(new ArrayList<Object>());
+				fullTags.get(0).add(new Object());
 			}
 			
 			Elements hrefs = doc.select("a[href]"); //gets all a tags with href
@@ -116,12 +179,15 @@ public class RecursiveParser {
 					for (int i=0; i<graph.size(); i++) {
 						graph.get(i).add(false);
 						linkTexts.get(i).add("");
+						fullTags.get(i).add(new Object());
 					}
 					graph.add(new ArrayList<Boolean>());
 					linkTexts.add(new ArrayList<String>());
+					fullTags.add(new ArrayList<Object>());
 					for (int i=0; i<graph.size(); i++) {
 						graph.get(graph.size()-1).add(false);
 						linkTexts.get(graph.size()-1).add("");
+						fullTags.get(graph.size()-1).add(new Object());
 					}
 				}
 				int node1loc = nodeNames.indexOf(currentLocation.getPathName());
@@ -129,8 +195,9 @@ public class RecursiveParser {
 				if (!graph.get(node1loc).get(node2loc)) {
 					graph.get(node1loc).set(node2loc, true);
 					linkTexts.get(node1loc).set(node2loc, e.text());
-					System.out.println(node1loc+": "+currentLocation.getPathName()+"  -"+e.text()+"->  "+node2loc+": "+newRPPath);
-					System.out.println();
+					fullTags.get(node1loc).set(node2loc, e);
+					//System.out.println(node1loc+": "+currentLocation.getPathName()+"  -"+e.text()+"->  "+node2loc+": "+newRPPath);
+					//System.out.println();
 					if (!contains) {
 						parseATags(newRPPath);
 					}
@@ -141,7 +208,23 @@ public class RecursiveParser {
 		}
 	}
 	
-	public static void parseUserInputs(String url) {
+	public static void parseInputs(Page page) {
+		Document doc = null;
+		
+		boolean go = true;
+		
+		try {
+			doc = Jsoup.connect(page.getPathName()).get(); //gets all the html information from the page
+		} catch (IOException e) {
+			//print a notice saying that the link is unreachable 
+			//e.printStackTrace();
+			go = false;
+		}
+		
+		if (go) {
+			Elements inputs = doc.select("input");
+			for (Element e:inputs) System.out.println(e);
+		}
 		
 	}
  
