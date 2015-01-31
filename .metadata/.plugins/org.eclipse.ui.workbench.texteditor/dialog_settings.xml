@@ -13,8 +13,10 @@
 		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="currentLocation" key="selection"/>
+		<item value="route" key="selection"/>
 		<list key="findhistory">
+			<item value="route"/>
+			<item value="linkTexts"/>
 			<item value="currentLocation"/>
 			<item value="system"/>
 			<item value="graph"/>

@@ -87,7 +87,7 @@ public class RecursiveParser {
 			}
 		}
 		
-		parseInputs(nodes.get(0));
+		parseInputs(nodes.get(1));
 		
 		sc.close();
 	}
@@ -123,7 +123,7 @@ public class RecursiveParser {
 		
 		Page currentLocation = new Page(url); //the page the parser is currently on
 		//somehow check if they're in the root and don't force them to input index.html
-		currentLocation.setRoute(new ArrayList<Page>()); //sets original route to nothing (root page)
+		//currentLocation.setRoute(new ArrayList<Page>()); //sets original route to nothing (root page)
 				
 		Document doc = null;
 		
@@ -215,6 +215,7 @@ public class RecursiveParser {
 		
 		try {
 			doc = Jsoup.connect(page.getPathName()).get(); //gets all the html information from the page
+			System.out.println(doc);
 		} catch (IOException e) {
 			//print a notice saying that the link is unreachable 
 			//e.printStackTrace();

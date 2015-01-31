@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Page {
 	
 	private String path;
-	private ArrayList<Page> route = new ArrayList<Page>();
+	//private ArrayList<Page> route = new ArrayList<Page>();
 	private boolean live;
 	private String errorType;
 	private int responseCode;
@@ -34,17 +34,17 @@ public class Page {
 		return path;
 	}
 	
-	public ArrayList<Page> getRoute() {
-		return route;
-	}
+	//public ArrayList<Page> getRoute() {
+	//	return route;
+	//}
 	
 	public int getResponseCode() {
 		return responseCode;
 	}
 	
-	public void setRoute(ArrayList<Page> route) {
-		this.route = route;
-	}
+	//public void setRoute(ArrayList<Page> route) {
+	//	this.route = route;
+	//}
 	
 	public String toString() {
 		return (responseCode+" "+path);
