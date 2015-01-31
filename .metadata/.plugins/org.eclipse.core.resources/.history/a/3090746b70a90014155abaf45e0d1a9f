@@ -200,12 +200,7 @@ public class RecursiveParser {
 					fullTags.get(node1loc).set(node2loc, e);
 					//System.out.println(node1loc+": "+currentLocation.getPathName()+"  -"+e.text()+"->  "+node2loc+": "+newRPPath);
 					//System.out.println();
-					boolean sameDomain = true;
-					try {
-						if (!getDomainName(currentLocation.getPathName()).equals(getDomainName(newRPPath)));
-					} catch (URISyntaxException e1) {
-					}
-					if (!contains && sameDomain) {
+					if (!contains && getDomainName(currentLocation.getPathName()).equals(getDomainName(newRPPath))) {
 						parseATags(newRPPath);
 					}
 				}

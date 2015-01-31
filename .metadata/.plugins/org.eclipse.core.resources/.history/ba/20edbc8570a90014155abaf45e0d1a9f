@@ -205,7 +205,7 @@ public class RecursiveParser {
 						if (!getDomainName(currentLocation.getPathName()).equals(getDomainName(newRPPath)));
 					} catch (URISyntaxException e1) {
 					}
-					if (!contains && sameDomain) {
+					if (!contains) {
 						parseATags(newRPPath);
 					}
 				}

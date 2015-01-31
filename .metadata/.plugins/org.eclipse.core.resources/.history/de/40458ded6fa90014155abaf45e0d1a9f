@@ -1,8 +1,6 @@
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -200,12 +198,7 @@ public class RecursiveParser {
 					fullTags.get(node1loc).set(node2loc, e);
 					//System.out.println(node1loc+": "+currentLocation.getPathName()+"  -"+e.text()+"->  "+node2loc+": "+newRPPath);
 					//System.out.println();
-					boolean sameDomain = true;
-					try {
-						if (!getDomainName(currentLocation.getPathName()).equals(getDomainName(newRPPath)));
-					} catch (URISyntaxException e1) {
-					}
-					if (!contains && sameDomain) {
+					if (!contains) {
 						parseATags(newRPPath);
 					}
 				}
