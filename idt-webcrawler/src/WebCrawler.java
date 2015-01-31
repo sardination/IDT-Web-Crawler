@@ -10,27 +10,30 @@ public class WebCrawler extends JFrame implements ActionListener {
 	private JPanel insertURLPanel; //Container that has input and instructions for entering URL
 	private JLabel insertURLLabel; //Instructs users to enter the URL
 	private JTextField insertURLField; //Field where users enter the URL
+	private JPanel wholeWindow;
 	
 	private JButton letsCrawlButton; //Once user is done, press this button to start crawling the website entered
 	
 	public WebCrawler () {
 		super("Web Crawler Application");
-		setBounds(100, 100, 400, 200);
+		setBounds(100, 100, 550, 200);
 		
 		//Initialize fields
 		insertURLPanel = new JPanel();
+		wholeWindow = new JPanel();
 		insertURLLabel = new JLabel("Insert URL:");
 		insertURLField = new JTextField("", 30);
 		letsCrawlButton = new JButton("Crawl This Website");
 		
-		//Add items to JPanel
+		//Add items to JPanels
 		insertURLPanel.add(insertURLLabel);
 		insertURLPanel.add(insertURLField);
+		wholeWindow.add(insertURLPanel);
+		wholeWindow.add(letsCrawlButton);
 		
 		//Add items to frame
 		Container con = this.getContentPane();
-		con.add(insertURLPanel);
-		con.add(letsCrawlButton);
+		con.add(wholeWindow);
 		setVisible(true);
 		
 		//Add ActionListener
