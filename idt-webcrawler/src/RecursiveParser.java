@@ -22,7 +22,6 @@ public class RecursiveParser {
 	public static ArrayList<ArrayList<Object>> fullTags = new ArrayList<ArrayList<Object>>();
 	public static ArrayList<Page> nodes = new ArrayList<Page>();
 	public static ArrayList<String> nodeNames = new ArrayList<String>();
-	
 
 	public static void main(String[] args) {
 		
@@ -89,7 +88,7 @@ public class RecursiveParser {
 			}
 		}
 		
-		parseInputs(nodes.get(1));
+		nodes.get(1).parseInputs();
 		
 		sc.close();
 	}
@@ -214,27 +213,7 @@ public class RecursiveParser {
 		
 		}
 	}
-	
-	public static void parseInputs(Page page) {
-		Document doc = null;
-		
-		boolean go = true;
-		
-		try {
-			doc = Jsoup.connect(page.getPathName()).get(); //gets all the html information from the page
-			System.out.println(doc);
-		} catch (IOException e) {
-			//print a notice saying that the link is unreachable 
-			//e.printStackTrace();
-			go = false;
-		}
-		
-		if (go) {
-			Elements inputs = doc.select("input");
-			for (Element e:inputs) System.out.println(e);
-		}
-		
-	}
+
 	
 	public static String getDomainName(String url) throws URISyntaxException {
 	    URI uri = new URI(url);
