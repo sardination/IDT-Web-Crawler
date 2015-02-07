@@ -16,23 +16,18 @@ import org.jsoup.select.Elements;
 //making a graph with nodes and paths :3
 
 public class RecursiveParser {
-	public ArrayList<ArrayList<Boolean>> graph = new ArrayList<ArrayList<Boolean>>(); 
+	public static ArrayList<ArrayList<Boolean>> graph = new ArrayList<ArrayList<Boolean>>(); 
 		//graph.get(a).get(b) checks the path from nodes.get(a) to nodes.get(b)
-	public ArrayList<ArrayList<String>> linkTexts = new ArrayList<ArrayList<String>>();
-	public ArrayList<ArrayList<Object>> fullTags = new ArrayList<ArrayList<Object>>();
-	public ArrayList<Page> nodes = new ArrayList<Page>();
-	public ArrayList<String> nodeNames = new ArrayList<String>();
-	public String path = "";
+	public static ArrayList<ArrayList<String>> linkTexts = new ArrayList<ArrayList<String>>();
+	public static ArrayList<ArrayList<Object>> fullTags = new ArrayList<ArrayList<Object>>();
+	public static ArrayList<Page> nodes = new ArrayList<Page>();
+	public static ArrayList<String> nodeNames = new ArrayList<String>();
 
-	public RecursiveParser(String path) {
-		this.path = path;
-	}
-	
 	public void parseNow() {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		parseATags(path); //default test value for now
+		parseATags("http://localhost:8080/version1/"); //default test value for now
 		
 		
 		for (Page p:nodes) {
@@ -98,7 +93,7 @@ public class RecursiveParser {
 		sc.close();
 	}
 	
-	public  void parseATags(String url) {
+	public static void parseATags(String url) {
 		
 		if (url.length()>=1) {
 			HttpURLConnection con;
@@ -220,7 +215,7 @@ public class RecursiveParser {
 	}
 
 	
-	public String getDomainName(String url) throws URISyntaxException {
+	public static String getDomainName(String url) throws URISyntaxException {
 	    URI uri = new URI(url);
 	    String domain = uri.getHost();
 	    return domain.startsWith("www.") ? domain.substring(4) : domain;

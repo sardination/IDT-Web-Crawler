@@ -32,7 +32,7 @@ public class RecursiveParser {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		parseATags(path); //default test value for now
+		parseATags("http://localhost:8080/version1/"); //default test value for now
 		
 		
 		for (Page p:nodes) {
