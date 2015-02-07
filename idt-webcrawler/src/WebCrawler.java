@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 /**
@@ -48,7 +50,9 @@ public class WebCrawler extends JFrame implements ActionListener {
 	 * Listens for "Crawl" button click
 	 */
 	public void actionPerformed(ActionEvent ae) {
-		//TODO Crawl the website
+		RecursiveParser parser = new RecursiveParser(insertURLField.getText());
+		parser.parseNow();
+		ArrayList<Page> pages = parser.nodes;
 	}
 
 }
