@@ -36,7 +36,7 @@ public class WebCrawler extends JFrame implements ActionListener {
 		insertURLLabel = new JLabel("Insert URL:");
 		insertURLField = new JTextField("", 30);
 		letsCrawlButton = new JButton("Crawl This Website");
-		getFile = new JButton("Load Previous Version Report");
+		getFile = new JButton("Load File");
 		getFile.addActionListener(this);
 		fc = new JFileChooser();
 		
@@ -91,8 +91,7 @@ public class WebCrawler extends JFrame implements ActionListener {
 		}else{
 			RecursiveParser parser = new RecursiveParser(insertURLField.getText());
 			parser.parseNow();
-			new Table(parser);
-			this.dispose();
+			ArrayList<Page> pages = parser.nodes;
 		}
 	}
 

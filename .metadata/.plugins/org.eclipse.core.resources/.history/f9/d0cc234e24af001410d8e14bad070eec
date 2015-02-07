@@ -98,7 +98,7 @@ public class RecursiveParser {
 		sc.close();
 	}
 	
-	public void parseATags(String url) {
+	public  void parseATags(String url) {
 		
 		if (url.length()>=1) {
 			HttpURLConnection con;
