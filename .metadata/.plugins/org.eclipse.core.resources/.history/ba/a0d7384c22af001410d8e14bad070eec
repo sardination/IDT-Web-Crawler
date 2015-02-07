@@ -170,6 +170,7 @@ public class Table extends JFrame implements ActionListener {
 				// This is where a real application would save the file.
 			}
 		}
+		
 	}
 
 	/*
@@ -177,6 +178,5 @@ public class Table extends JFrame implements ActionListener {
 		new Table();
 	}
 	*/
-	
 
 }

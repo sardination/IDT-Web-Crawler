@@ -1,24 +1,18 @@
+import java.awt.Button;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 
-public class Table extends JFrame implements ActionListener {
-	
-	private final JFileChooser fc = new JFileChooser();
-	private final String[] columnNames = { "Page Name", "HTTP Response Code", "Pass/Fail", "Page"};
+public class Table extends JFrame {
+
+	private final String[] columnNames = { "Page Name", "Error Code", "Pass/Fail", "Page"};
 	/*private Object[][] data = { { "Calculator", "False", new Button("TEST") },
 			{ "Page2", "True", "WTF", "ButtonTest" }, { "SDGIOSDN", "Im", "insane", "ButtonTest" },
 			{ "Calculator", "False", "Maybe?", "ButtonTest" },
@@ -32,15 +26,12 @@ public class Table extends JFrame implements ActionListener {
 			{ "Calculator", "False", "Maybe?", "ButtonTest" },
 			{ "Calculator", "False", "Maybe?", "ButtonTest" } };
 			*/
-	private Object[][] data = new Object[0][0];
 
 	private Table frame;
 	private JPanel panel;
 	private JLabel instructions;
 	private JScrollPane table;
 	private JTable info;
-	private JButton saveFile;
-	private RecursiveParser rp;
 
 	// private static JTextArea area;
 	// private static JScrollPane pane;
@@ -50,33 +41,11 @@ public class Table extends JFrame implements ActionListener {
 		setBounds(100, 100, 400, 200);
 		setLayout(new GridBagLayout());
 
-		this.rp = rp;
-		listsToArray();
-		
 		// Initialize fields
 		panel = new JPanel();
 		instructions = new JLabel("Insert URL:");
 		info = new JTable(data, columnNames);
 		table = new JScrollPane(info);
-		saveFile = new JButton("Save File");
-		saveFile.addActionListener(this);
-		
-		//file chooser only accepts certain files
-		fc.setFileFilter(new FileFilter() {
-			@Override
-			public boolean accept(File f) {
-				if (f.isDirectory()) {
-					return true;
-				}
-				final String name = f.getName();
-				return name.endsWith(".png") || name.endsWith(".jpg") || name.endsWith(".csv");
-			}
-
-			@Override
-			public String getDescription() {
-				return "*.png,*.jpg";
-			}
-		});
 
 		GridBagConstraints c = new GridBagConstraints();
 		DefaultTableModel dm = new DefaultTableModel();
@@ -133,19 +102,7 @@ public class Table extends JFrame implements ActionListener {
      * @param newStatus - the new status of that page
      */
    
-	public void listsToArray() {
-		data = new Object[rp.nodes.size()][4];
-		for (int i=0; i<rp.nodes.size(); i++) {
-			data[i][0] = rp.nodes.get(i).getPathName();
-			data[i][1] = rp.nodes.get(i).getResponseCode();
-			if (String.valueOf(rp.nodes.get(i).getResponseCode()).substring(0,1)=="4" 
-					|| String.valueOf(rp.nodes.get(i).getResponseCode()).substring(0,1)=="5") {
-				data[i][2] = "Fail";
-			} else {
-				data[i][2] = "Pass";
-			}
-			data[i][3] = "Value Testing";
-		}
+	public void listsToArrays() {
 		
 	}
 	
@@ -161,22 +118,10 @@ public class Table extends JFrame implements ActionListener {
     	}
     }
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == saveFile) {
-			int returnVal = fc.showSaveDialog(Table.this);
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				File file = fc.getSelectedFile();
-				// This is where a real application would save the file.
-			}
-		}
-	}
-
 	/*
 	public static void main(String[] args) {
 		new Table();
 	}
 	*/
-	
 
 }
