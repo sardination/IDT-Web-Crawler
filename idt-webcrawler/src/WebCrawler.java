@@ -1,8 +1,16 @@
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
 
 /**
  * This class will be a window that prompts the user for base URL.
@@ -13,6 +21,8 @@ public class WebCrawler extends JFrame implements ActionListener {
 	private JLabel insertURLLabel; //Instructs users to enter the URL
 	private JTextField insertURLField; //Field where users enter the URL
 	private JPanel wholeWindow;
+	private JButton getFile;
+	private JFileChooser fc;
 	
 	private JButton letsCrawlButton; //Once user is done, press this button to start crawling the website entered
 	
@@ -26,12 +36,33 @@ public class WebCrawler extends JFrame implements ActionListener {
 		insertURLLabel = new JLabel("Insert URL:");
 		insertURLField = new JTextField("", 30);
 		letsCrawlButton = new JButton("Crawl This Website");
+		getFile = new JButton("Load File");
+		getFile.addActionListener(this);
+		fc = new JFileChooser();
+		
+		//file chooser only accepts certain files
+		fc.setFileFilter(new FileFilter() {
+			@Override
+			public boolean accept(File f) {
+				if (f.isDirectory()) {
+					return true;
+				}
+				final String name = f.getName();
+				return name.endsWith(".png") || name.endsWith(".jpg") || name.endsWith(".csv");
+			}
+
+			@Override
+			public String getDescription() {
+				return "*.png,*.jpg";
+			}
+		});
 		
 		//Add items to JPanels
 		insertURLPanel.add(insertURLLabel);
 		insertURLPanel.add(insertURLField);
 		wholeWindow.add(insertURLPanel);
 		wholeWindow.add(letsCrawlButton);
+		wholeWindow.add(getFile);
 		
 		//Add items to frame
 		Container con = this.getContentPane();
@@ -50,9 +81,18 @@ public class WebCrawler extends JFrame implements ActionListener {
 	 * Listens for "Crawl" button click
 	 */
 	public void actionPerformed(ActionEvent ae) {
-		RecursiveParser parser = new RecursiveParser(insertURLField.getText());
-		parser.parseNow();
-		ArrayList<Page> pages = parser.nodes;
+		if (ae.getSource() == getFile) {
+			int returnVal = fc.showOpenDialog(WebCrawler.this);
+
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				// This is where a real application would open the file.
+			}
+		}else{
+			RecursiveParser parser = new RecursiveParser(insertURLField.getText());
+			parser.parseNow();
+			ArrayList<Page> pages = parser.nodes;
+		}
 	}
 
 }
