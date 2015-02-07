@@ -52,8 +52,7 @@ public class WebCrawler extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		RecursiveParser parser = new RecursiveParser(insertURLField.getText());
 		parser.parseNow();
-		new Table(parser);
-		//ArrayList<Page> pages = parser.nodes;
+		ArrayList<Page> pages = parser.nodes;
 	}
 
 }
