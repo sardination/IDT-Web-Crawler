@@ -50,12 +50,24 @@ public class Table extends JFrame {
 		DefaultTableModel dm = new DefaultTableModel();
 		dm.setDataVector(data, columnNames);
 
+		
 		JTable table = new JTable(dm);
 		table.getColumn("Page").setCellRenderer(new ButtonRenderer());
-		table.getColumn("").setCellEditor(
+		table.getColumn("Page").setCellEditor(
 				new ButtonEditor(new JCheckBox()));
+		
+		//make everything unclickable except for buttons
+		for (int i = 0; i < table.getColumnCount(); i++)
+		{
+			if(i == table.getColumnCount() - 1)
+				continue;
+		    Class<?> col_class = table.getColumnClass(i);
+		    table.setDefaultEditor(col_class, null);        // remove editor
+		}
 		JScrollPane scroll = new JScrollPane(table);
 
+		
+		
 		// Add items to JPanel
 		// panel.add(insertURLLabel);
 		c.fill = GridBagConstraints.HORIZONTAL;
