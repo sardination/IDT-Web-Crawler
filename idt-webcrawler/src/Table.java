@@ -49,7 +49,24 @@ public class Table extends JFrame{
 
         
     }
-	
+    
+    /**
+     * Changes the status of a page.
+     * @param pageName - name of page whose status was changed
+     * @param newStatus - the new status of that page
+     */
+    public void changePageStatus (String pageName, String newError) {
+    	int index = -1;
+    	
+    	for(int i = 0; i < data.length; i++) {
+    		if (data[i][1].equals(pageName)) {index = i;}
+    	}
+    	
+    	if(index != -1) {
+    		data[index][2] = newError;
+    	}
+    }
+    
 	public static void main(String[] args){
 		new Table();
 	}
