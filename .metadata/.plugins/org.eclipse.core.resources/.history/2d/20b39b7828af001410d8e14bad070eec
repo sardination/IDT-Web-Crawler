@@ -56,7 +56,7 @@ public class Table extends JFrame implements ActionListener {
 					return true;
 				}
 				final String name = f.getName();
-				return name.endsWith(".csv");
+				return name.endsWith(".png") || name.endsWith(".jpg") || name.endsWith(".csv");
 			}
 
 			@Override
