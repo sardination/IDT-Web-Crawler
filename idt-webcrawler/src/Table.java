@@ -19,8 +19,8 @@ public class Table extends JFrame implements ActionListener {
 	
 	private final JFileChooser fc = new JFileChooser();
 	private final String[] columnNames = { "Page Name", "HTTP Response Code", "Pass/Fail", "Page"};
-	private Object[][] data = new Object[0][0];
-	private static String[][] tagsGraph = new String[0][0];
+	public static Object[][] data = new Object[0][0];
+	public static String[][] tagsGraph = new String[0][0];
 
 	private Table frame;
 	private JPanel panel;
@@ -35,7 +35,7 @@ public class Table extends JFrame implements ActionListener {
 
 	public Table(RecursiveParser rp) {
 		super("Web Crawler Application");
-		setBounds(100, 100, 400, 200);
+		setBounds(100, 100, 800, 200);
 		setLayout(new GridBagLayout());
 
 		this.rp = rp;
@@ -59,7 +59,7 @@ public class Table extends JFrame implements ActionListener {
 				final String name = f.getName();
 				return name.endsWith(".csv");
 			}
-
+			
 			@Override
 			public String getDescription() {
 				return "*.csv";
@@ -77,6 +77,8 @@ public class Table extends JFrame implements ActionListener {
 		
 		table.getColumn("Page Name").setCellRenderer(new ButtonRenderer());
 		table.getColumn("Page Name").setCellEditor(new ButtonEditorLinks(new JCheckBox()));
+		
+		table.getColumnModel().getColumn(0).setPreferredWidth(300);
 		
 		//make everything unclickable except for buttons
 		for (int i = 0; i < table.getColumnCount(); i++)
