@@ -44,13 +44,13 @@ public class UserInputWindow extends JFrame implements ActionListener {
 				wholeWindow.add(panel);
 				panel = null;
 			} else if (instructions.get(i).getType().equals("submit") || instructions.get(i).getType().equals("button")) {
-				//auto click button and see if there are changes
-			} else if (instructions.get(i).getType().equals("radio")) {
-				JRadioButton radio = new JRadioButton(instructions.get(i).getValue());
+				JCheckBox checkbox = new JCheckBox(instructions.get(i).getValue());
 				panel = new JPanel();
-				panel.add(radio);
+				panel.add(checkbox);
 				wholeWindow.add(panel);
 				panel = null;
+			} else if (instructions.get(i).getType().equals("radio")) {
+				
 			}
 		}
 		
