@@ -30,27 +30,19 @@ public class UserInputWindow extends JFrame implements ActionListener {
 		//Create instances of input types (ex. create a text field to input text, etc.)
 		JPanel panel = new JPanel();
 		for(int i = 0; i < instructions.size(); i++) {
-			if(instructions.get(i).getType().equals("text") || instructions.get(i).getType().equals("password")) {
+			if(instructions.get(i).getType() == "String") {
 				JLabel label = new JLabel(instructions.get(i).getValue());
 				JTextField field = new JTextField(20);
 				panel.add(label); 
 				panel.add(field);
 				wholeWindow.add(panel);
 				panel = null;
-			} else if(instructions.get(i).getType().equals("checkbox")) {
+			} else if(instructions.get(i).getType() == "Checkbox") {
 				JCheckBox checkbox = new JCheckBox(instructions.get(i).getValue());
 				panel = new JPanel();
 				panel.add(checkbox);
 				wholeWindow.add(panel);
 				panel = null;
-			} else if (instructions.get(i).getType().equals("submit") || instructions.get(i).getType().equals("button")) {
-				JCheckBox checkbox = new JCheckBox(instructions.get(i).getValue());
-				panel = new JPanel();
-				panel.add(checkbox);
-				wholeWindow.add(panel);
-				panel = null;
-			} else if (instructions.get(i).getType().equals("radio")) {
-				
 			}
 		}
 		
