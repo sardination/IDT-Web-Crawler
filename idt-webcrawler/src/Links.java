@@ -33,7 +33,7 @@ public class Links extends JFrame implements ActionListener {
 	// private static JScrollPane pane;
 
 	public Links(String name, String previous){
-		super("Links");
+		super("No links in " + name);
 		current = this;
 		setBounds(200, 200, 800, 200);
 		setLayout(new GridBagLayout());
@@ -71,7 +71,7 @@ public class Links extends JFrame implements ActionListener {
 	}
 	
 	public Links(String[][] data, String name) {
-		super("Links");
+		super("Links in " + name);
 		current = this;
 		setBounds(200, 200, 800, 200);
 		setLayout(new GridBagLayout());
