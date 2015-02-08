@@ -29,68 +29,73 @@ public class RecursiveParser {
 	}
 	
 	public void parseNow() {
-
+		
+		Scanner sc = new Scanner(System.in);
+		
 		parseATags(path); //default test value for now
 		
-//		
-//		for (Page p:nodes) {
-//			System.out.println(p);
-//		}
-//		System.out.println();
-//		
-//		for (int i=0; i<graph.size(); i++) {
-//			for (int j=0; j<graph.get(i).size(); j++) {
-//				if (graph.get(i).get(j)) {
-//					System.out.println(nodes.get(i).getPathName()+" -- "+linkTexts.get(i).get(j)+" --> "+nodes.get(j).getPathName());
-//					String addition = "";
-//					if (nodes.get(j).getResponseCode() != 200) {
-//						addition = " "+nodes.get(j).getPathName() +" has error ID "+nodes.get(j).getResponseCode()+".";
-//					}
-//					System.out.println("Is this the page you want this link to lead to?"+addition+" (Y/N)");
-//					if (ans.equalsIgnoreCase("N")) {
-//						System.out.println("Which valid page would you like this link to lead to? Please enter the number.");
-//						int num = 1;
-//						int[] numsOfNodes = new int[nodes.size()];
-//						for (int k=0; k<nodeNames.size(); k++) {
-//							if (nodes.get(k).getResponseCode()==200) {
-//								numsOfNodes[num] = k;
-//								System.out.println(num+". "+nodeNames.get(k));
-//								num++;
-//							}
-//						}
-//						System.out.println(num+". Other");
-//						int pageNum = Integer.parseInt(sc.nextLine());
-//						String newPagePath = "";
-//						if (pageNum==num) {
-//							newPagePath = sc.nextLine();
-//						} else if (pageNum!=0 && pageNum<num){
-//							newPagePath = nodeNames.get(numsOfNodes[pageNum]);
-//						}
-//
-//						String common = "";
-//						for (int m=1; m<=Math.min(newPagePath.length(), nodeNames.get(i).length()); m++) {
-//							if (newPagePath.substring(0,m).equals(nodeNames.get(i).substring(0,m))) {
-//								common = newPagePath.substring(0,m);
-//							} else {
-//								break;
-//							}
-//						}
-//						
-//						if (common.length()<newPagePath.length()) {
-//							newPagePath = newPagePath.replaceFirst(common, "");
-//						}
-//						
-//						Element replacementTag = (Element)fullTags.get(i).get(j);
-//						
-//						System.out.println("It is suggested that you replace this tag: "+fullTags.get(i).get(j));
-//						System.out.println("with this tag: "+replacementTag.attr("href",newPagePath));
-//						System.out.println();
-//					}
-//				}
-//			}
-//		}
+		
+		for (Page p:nodes) {
+			System.out.println(p);
+		}
+		System.out.println();
+		
+		for (int i=0; i<graph.size(); i++) {
+			for (int j=0; j<graph.get(i).size(); j++) {
+				if (graph.get(i).get(j)) {
+					System.out.println(nodes.get(i).getPathName()+" -- "+linkTexts.get(i).get(j)+" --> "+nodes.get(j).getPathName());
+					String addition = "";
+					if (nodes.get(j).getResponseCode() != 200) {
+						addition = " "+nodes.get(j).getPathName() +" has error ID "+nodes.get(j).getResponseCode()+".";
+					}
+					System.out.println("Is this the page you want this link to lead to?"+addition+" (Y/N)");
+					String ans = sc.nextLine();
+					if (ans.equalsIgnoreCase("N")) {
+						System.out.println("Which valid page would you like this link to lead to? Please enter the number.");
+						int num = 1;
+						int[] numsOfNodes = new int[nodes.size()];
+						for (int k=0; k<nodeNames.size(); k++) {
+							if (nodes.get(k).getResponseCode()==200) {
+								numsOfNodes[num] = k;
+								System.out.println(num+". "+nodeNames.get(k));
+								num++;
+							}
+						}
+						System.out.println(num+". Other");
+						int pageNum = Integer.parseInt(sc.nextLine());
+						String newPagePath = "";
+						if (pageNum==num) {
+							newPagePath = sc.nextLine();
+						} else if (pageNum!=0 && pageNum<num){
+							newPagePath = nodeNames.get(numsOfNodes[pageNum]);
+						}
+
+						String common = "";
+						for (int m=1; m<=Math.min(newPagePath.length(), nodeNames.get(i).length()); m++) {
+							if (newPagePath.substring(0,m).equals(nodeNames.get(i).substring(0,m))) {
+								common = newPagePath.substring(0,m);
+							} else {
+								break;
+							}
+						}
+						
+						if (common.length()<newPagePath.length()) {
+							newPagePath = newPagePath.replaceFirst(common, "");
+						}
+						
+						Element replacementTag = (Element)fullTags.get(i).get(j);
+						
+						System.out.println("It is suggested that you replace this tag: "+fullTags.get(i).get(j));
+						System.out.println("with this tag: "+replacementTag.attr("href",newPagePath));
+						System.out.println();
+					}
+				}
+			}
+		}
 		
 		nodes.get(1).parseInputs();
+		
+		sc.close();
 	}
 	
 	public void parseATags(String url) {
