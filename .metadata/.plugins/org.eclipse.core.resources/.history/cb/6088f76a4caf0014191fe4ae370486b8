@@ -180,8 +180,32 @@ public class Table extends JFrame implements ActionListener {
 			}
 		}
 	}
-	
+
 	public void writeVersionReport(String name) {
+		String toWrite;
+		// TODO Get info for these variables!!!!!!!!!!!!!!!!!!!!
+		String pagePath = "path";
+		ArrayList<Page> linkedPages = null;
+		ArrayList<Input> inputValues = null;
+		// TODO Get info for these variables!!!!!!!!!!!!!!!!!!!!
+		toWrite = pagePath;
+		toWrite = toWrite.concat("\n,Linked Pages");
+		String str;
+		for (int i = 0; i < linkedPages.size(); i++) {
+			str = linkedPages.get(i).getResponseCode() + ","
+					+ linkedPages.get(i).getPathName();
+			toWrite = toWrite.concat("\t" + str);
+		}
+		toWrite = toWrite.concat("\n, Input Values Test");
+		for (int j = 0; j < inputValues.size(); j++) {
+			str = inputValues.get(j).getTag() + ","
+					+ inputValues.get(j).toString();
+			toWrite = toWrite.concat("\t" + str);
+		}
+		outputToFile(toWrite,name);
+	}
+	
+	public void writeVersionChangesReport(String name) {
 		String toWrite = "";
 		for (int i=0; i<data.length; i++) {
 			toWrite += data[i][0] +"\n";

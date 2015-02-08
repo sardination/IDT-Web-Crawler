@@ -371,3 +371,67 @@ java.lang.NegativeArraySizeException
 	at org.eclipse.jdt.internal.core.search.indexing.IndexManager.notifyIdle(IndexManager.java:644)
 	at org.eclipse.jdt.internal.core.search.processing.JobManager.run(JobManager.java:388)
 	at java.lang.Thread.run(Thread.java:724)
+!SESSION 2015-02-07 23:19:25.287 -----------------------------------------------
+eclipse.buildId=4.4.0.I20140606-1215
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product -keyring /Users/Suriya/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.standard.product -keyring /Users/Suriya/.eclipse_keyring -showlocation
+
+!ENTRY edu.wpi.first.wpilib.plugins.riolog 4 0 2015-02-07 23:19:27.015
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: edu.wpi.first.wpilib.plugins.riolog [257]
+  Unresolved requirement: Require-Capability: osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.core.resources 2 10035 2015-02-07 23:19:30.804
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.core.net 1 0 2015-02-07 23:19:33.667
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2015-02-07 23:19:39.186
+!MESSAGE Installing tools if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2015-02-07 23:19:39.202
+!MESSAGE Install necessary for tools
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2015-02-07 23:19:39.455
+!MESSAGE unzip /var/folders/5m/8cy41p0906vb79ygjk3dhfxw0000gn/T/tools-8107761359843836927.zip -d /Users/Suriya/wpilib/tools
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2015-02-07 23:19:39.866
+!MESSAGE Installedtools
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2015-02-07 23:19:39.880
+!MESSAGE Installing cpp if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2015-02-07 23:19:39.893
+!MESSAGE Install necessary for cpp
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2015-02-07 23:19:40.145
+!MESSAGE unzip /var/folders/5m/8cy41p0906vb79ygjk3dhfxw0000gn/T/cpp-5034764147234935838.zip -d /Users/Suriya/wpilib/cpp/current
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2015-02-07 23:19:42.076
+!MESSAGE Installedcpp
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2015-02-07 23:19:42.091
+!MESSAGE Installing java if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2015-02-07 23:19:42.104
+!MESSAGE Install necessary for java
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2015-02-07 23:19:42.328
+!MESSAGE unzip /var/folders/5m/8cy41p0906vb79ygjk3dhfxw0000gn/T/java-623989115835429064.zip -d /Users/Suriya/wpilib/java/current
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2015-02-07 23:19:53.841
+!MESSAGE Installedjava
