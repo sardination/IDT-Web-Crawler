@@ -144,11 +144,11 @@ public class Table extends JFrame implements ActionListener {
 			data[i][3] = "Value Testing";
 		}
 		
-		tagsGraph = new String[rp.linkTexts.size()][rp.linkTexts.size()];
+		tagsGraph = new Object[rp.linkTexts.size()][rp.linkTexts.size()];
 		
 		for (int i=0; i<rp.linkTexts.size(); i++) {
 			for (int j=0; j<rp.linkTexts.size(); j++) {
-				tagsGraph[i][j] = rp.linkTexts.get(i).get(j);
+				
 			}
 		}
 		
