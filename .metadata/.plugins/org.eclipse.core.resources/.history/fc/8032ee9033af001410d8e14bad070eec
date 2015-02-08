@@ -31,7 +31,7 @@ public class RecursiveParser {
 	public void parseNow() {
 
 		parseATags(path); //default test value for now
-		//nodes.get(1).parseInputs();
+		nodes.get(1).parseInputs();
 	}
 	
 	public void parseATags(String url) {
@@ -76,8 +76,6 @@ public class RecursiveParser {
 		} catch (IOException e) {
 			//print a notice saying that the link is unreachable 
 			//e.printStackTrace();
-			go = false;
-		} catch (IllegalArgumentException i) {
 			go = false;
 		}
 		
