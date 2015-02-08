@@ -20,7 +20,7 @@ public class Table extends JFrame implements ActionListener {
 	private final JFileChooser fc = new JFileChooser();
 	private final String[] columnNames = { "Page Name", "HTTP Response Code", "Pass/Fail", "Page"};
 	private Object[][] data = new Object[0][0];
-	private String[][] graph = new String[0][0];
+	private Object[][] graph = new Object[0][0];
 
 	private Table frame;
 	private JPanel panel;
@@ -140,6 +140,9 @@ public class Table extends JFrame implements ActionListener {
 				data[i][2] = "Pass";
 			}
 			data[i][3] = "Value Testing";
+			
+			//graph stuff
+			
 		}
 		
 	}

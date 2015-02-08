@@ -140,6 +140,13 @@ public class Table extends JFrame implements ActionListener {
 				data[i][2] = "Pass";
 			}
 			data[i][3] = "Value Testing";
+			
+			//graph stuff
+			for (int j=0; j<rp.nodes.size(); j++) {
+				if (rp.graph.get(i).get(j)) {
+					
+				}
+			}
 		}
 		
 	}

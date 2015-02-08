@@ -20,7 +20,7 @@ public class Table extends JFrame implements ActionListener {
 	private final JFileChooser fc = new JFileChooser();
 	private final String[] columnNames = { "Page Name", "HTTP Response Code", "Pass/Fail", "Page"};
 	private Object[][] data = new Object[0][0];
-	private String[][] graph = new String[0][0];
+	private Object[][] graph = new Object[0][0];
 
 	private Table frame;
 	private JPanel panel;
@@ -130,7 +130,6 @@ public class Table extends JFrame implements ActionListener {
 	public void listsToArray() {
 		data = new Object[rp.nodes.size()][4];
 		for (int i=0; i<rp.nodes.size(); i++) {
-			//data stuff
 			data[i][0] = rp.nodes.get(i).getPathName();
 			data[i][1] = rp.nodes.get(i).getResponseCode();
 			if (String.valueOf(rp.nodes.get(i).getResponseCode()).substring(0,1).equals("4") 
