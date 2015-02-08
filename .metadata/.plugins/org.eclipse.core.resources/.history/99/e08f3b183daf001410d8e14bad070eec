@@ -179,12 +179,13 @@ public class Table extends JFrame implements ActionListener {
 			int returnVal = fc.showSaveDialog(Table.this);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
-				writeFile();
+				String export = "";
+				//export +=
 			}
 		}
 	}
 
-	public void writeFile(String name) {
+	public void writeFile() {
 		String toWrite;
 		// TODO Get info for these variables!!!!!!!!!!!!!!!!!!!!
 		String pagePath = "path";

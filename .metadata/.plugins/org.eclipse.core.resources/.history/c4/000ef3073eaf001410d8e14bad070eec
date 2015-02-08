@@ -87,7 +87,10 @@ public class WebCrawler extends JFrame implements ActionListener {
 		        }
 		    }
 		} catch (Exception e) {
-
+		    try {
+				UIManager.setLookAndFeel(UIManager.getInstalledLookAndFeels()[0].getClassName());
+			} catch (Exception x) {
+			}
 		}
 	}
 

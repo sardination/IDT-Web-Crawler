@@ -29,14 +29,6 @@ public class Input {
 		return tag;
 	}
 	
-	public boolean getPass() {
-		return pass;
-	}
-	
-	public void setPass(boolean pass) {
-		this.pass = pass;
-	}
-	
 	public String toString() {
 		return "Type: " + type +" Value: " + value + " InputID: " + inputID;
 	}

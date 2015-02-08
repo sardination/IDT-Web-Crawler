@@ -20,7 +20,7 @@ public class UserInputWindow extends JFrame implements ActionListener {
 		doneButton.addActionListener(this);
 		wholeWindow = new JPanel();
 		wholeWindow.setLayout(new BoxLayout(wholeWindow, BoxLayout.Y_AXIS));
-		instructions = page.getInputs();
+		instructions = Page.inputs;
 		
 		/*Input input1 = new Input("String", "Poke", "D:");
 		Input input2 = new Input("Checkbox", "100", "?");

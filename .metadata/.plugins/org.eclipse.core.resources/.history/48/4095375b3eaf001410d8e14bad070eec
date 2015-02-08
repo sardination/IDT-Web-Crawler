@@ -33,10 +33,6 @@ public class Input {
 		return pass;
 	}
 	
-	public void setPass(boolean pass) {
-		this.pass = pass;
-	}
-	
 	public String toString() {
 		return "Type: " + type +" Value: " + value + " InputID: " + inputID;
 	}

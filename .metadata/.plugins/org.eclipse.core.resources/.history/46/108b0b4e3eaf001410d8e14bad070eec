@@ -30,11 +30,7 @@ public class Input {
 	}
 	
 	public boolean getPass() {
-		return pass;
-	}
-	
-	public void setPass(boolean pass) {
-		this.pass = pass;
+		return pass
 	}
 	
 	public String toString() {

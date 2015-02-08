@@ -4,7 +4,6 @@ public class Input {
 	private String value = "";
 	private String inputID = "";
 	private String tag = "";
-	private boolean pass = false;
 	
 	public Input (String type, String value, String inputID, String tag) {
 		this.type = type.toLowerCase();
@@ -27,14 +26,6 @@ public class Input {
 	
 	public String getTag() {
 		return tag;
-	}
-	
-	public boolean getPass() {
-		return pass;
-	}
-	
-	public void setPass(boolean pass) {
-		this.pass = pass;
 	}
 	
 	public String toString() {

@@ -11,7 +11,7 @@ public class UserInputWindow extends JFrame implements ActionListener {
 	JPanel wholeWindow;
 	JButton doneButton;
 
-	public UserInputWindow(Page page) {
+	public UserInputWindow() {
 		super("Input Fields");
 		setBounds(0, 0, 500, 600);
 		
@@ -20,7 +20,7 @@ public class UserInputWindow extends JFrame implements ActionListener {
 		doneButton.addActionListener(this);
 		wholeWindow = new JPanel();
 		wholeWindow.setLayout(new BoxLayout(wholeWindow, BoxLayout.Y_AXIS));
-		instructions = page.getInputs();
+		instructions = Page.inputs;
 		
 		/*Input input1 = new Input("String", "Poke", "D:");
 		Input input2 = new Input("Checkbox", "100", "?");
