@@ -72,6 +72,8 @@ public class UserInputWindow extends JFrame implements ActionListener {
 				
 			}
 		}
+		if(arg0.getSource() == doneButton)
+			this.dispose();
 		
 	}
 
