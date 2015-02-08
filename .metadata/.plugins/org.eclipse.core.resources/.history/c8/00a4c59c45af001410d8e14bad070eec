@@ -209,15 +209,11 @@ public class Table extends JFrame implements ActionListener {
 		String toWrite = "";
 		for (int i=0; i<data.length; i++) {
 			toWrite += data[i][0] +"\n";
-			toWrite += ",LinkedPages\n";
+			toWrite += ",LinkedPages";
 			for (int j=0; j<tagsGraph.length; j++) {
 				if (!tagsGraph[i][j].equals("")) {
 					toWrite += ","+tagsGraph[i][j]+","+data[j][0]+"\n";
 				}
-			}
-			toWrite += ",Input Values Test\n";
-			for (int j=0; j<rp.nodes.get(i).inputs.size(); j++) {
-				toWrite += ","+rp.nodes.get(i).inputs.get(j).getTag()+",Correct Input?"+rp.nodes.get(i).inputs.get(j).getPass();
 			}
 		}
 		

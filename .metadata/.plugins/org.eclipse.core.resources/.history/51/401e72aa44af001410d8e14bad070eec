@@ -206,21 +206,29 @@ public class Table extends JFrame implements ActionListener {
 	}
 	
 	public void writeVersionChangesReport(String name) {
-		String toWrite = "";
-		for (int i=0; i<data.length; i++) {
-			toWrite += data[i][0] +"\n";
-			toWrite += ",LinkedPages\n";
-			for (int j=0; j<tagsGraph.length; j++) {
-				if (!tagsGraph[i][j].equals("")) {
-					toWrite += ","+tagsGraph[i][j]+","+data[j][0]+"\n";
-				}
-			}
-			toWrite += ",Input Values Test\n";
-			for (int j=0; j<rp.nodes.get(i).inputs.size(); j++) {
-				toWrite += ","+rp.nodes.get(i).inputs.get(j).getTag()+",Correct Input?"+rp.nodes.get(i).inputs.get(j).getPass();
-			}
+		String toWrite;
+		// TODO Get info for these variables!!!!!!!!!!!!!!!!!!!!
+		String pagePath = "path";
+		ArrayList<Page> linkedPages = null;
+		ArrayList<Input> inputValues = null;
+		// TODO Get info for these variables!!!!!!!!!!!!!!!!!!!!
+		toWrite = pagePath;
+		toWrite = toWrite.concat("\n,Linked Pages");
+		String str;
+		for (int i = 0; i < linkedPages.size(); i++) {
+			// TODO Edit linkedPages.get(i).toString() in next line
+			str = linkedPages.get(i).toString() + ","
+					+ linkedPages.get(i).getPathName();
+			toWrite = toWrite.concat("\t" + str);
 		}
-		
+		toWrite = toWrite.concat("\n, Input Values Test");
+		for (int j = 0; j < inputValues.size(); j++) {
+			// TODO Edit inputValues.get(j).toString() in next line
+			str = inputValues.get(j).getTag() + ","
+					+ inputValues.get(j).toString();
+			toWrite = toWrite.concat("\t" + str);
+		}
+		// System.out.print(toWrite);
 		outputToFile(toWrite,name);
 	}
 
