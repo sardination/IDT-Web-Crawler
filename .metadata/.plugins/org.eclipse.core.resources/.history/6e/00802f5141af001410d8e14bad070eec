@@ -25,7 +25,6 @@ public class WebCrawler extends JFrame implements ActionListener {
 	private JPanel wholeWindow;
 	private JButton getFile;
 	private JFileChooser fc;
-	private File oldVFile = null;
 	
 	private JButton letsCrawlButton; //Once user is done, press this button to start crawling the website entered
 	

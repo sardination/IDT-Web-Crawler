@@ -27,28 +27,26 @@ public class Table extends JFrame implements ActionListener {
 
 	private Table frame;
 	private JPanel panel;
-	private JButton saveChanges;
+	private JLabel instructions;
 	private JScrollPane table;
 	private JTable info;
 	private JButton saveFile;
-	private static RecursiveParser rp;
-	private File oldV;
+	private RecursiveParser rp;
 
 	// private static JTextArea area;
 	// private static JScrollPane pane;
 
-	public Table(File oldV, RecursiveParser rp) {
+	public Table(RecursiveParser rp) {
 		super("Web Crawler Application");
 		setBounds(100, 100, 800, 200);
 		setLayout(new GridBagLayout());
 
 		this.rp = rp;
-		this.oldV = oldV;
 		listsToArray();
 		
 		// Initialize fields
 		panel = new JPanel();
-		saveChanges = new JButton("Save Version Changes Report");
+		instructions = new JLabel("Insert URL:");
 		info = new JTable(data, columnNames);
 		table = new JScrollPane(info);
 		saveFile = new JButton("Save Version Report");

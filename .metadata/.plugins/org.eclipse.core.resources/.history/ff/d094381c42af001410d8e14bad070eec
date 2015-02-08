@@ -31,7 +31,7 @@ public class Table extends JFrame implements ActionListener {
 	private JScrollPane table;
 	private JTable info;
 	private JButton saveFile;
-	private static RecursiveParser rp;
+	private RecursiveParser rp;
 	private File oldV;
 
 	// private static JTextArea area;
@@ -48,7 +48,7 @@ public class Table extends JFrame implements ActionListener {
 		
 		// Initialize fields
 		panel = new JPanel();
-		saveChanges = new JButton("Save Version Changes Report");
+		instructions = new JLabel("Insert URL:");
 		info = new JTable(data, columnNames);
 		table = new JScrollPane(info);
 		saveFile = new JButton("Save Version Report");
