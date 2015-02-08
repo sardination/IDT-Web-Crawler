@@ -48,7 +48,7 @@ public class UserInputWindow extends JFrame implements ActionListener {
 			} else if (instructions.get(i).getType().equals("radio")) {
 				JRadioButton radio = new JRadioButton(instructions.get(i).getValue());
 				panel = new JPanel();
-				panel.add(radio);
+				panel.add(checkbox);
 				wholeWindow.add(panel);
 				panel = null;
 			}

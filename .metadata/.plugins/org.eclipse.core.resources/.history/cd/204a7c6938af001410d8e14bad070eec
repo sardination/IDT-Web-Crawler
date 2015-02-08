@@ -73,7 +73,7 @@ public class Page {
 		if (go) {
 			Elements inputTags = doc.select("input");
 			for (Element e:inputTags) {
-				inputs.add(new Input(e.attr("type"), e.attr("value"), e.attr("id"), e.tag().toString()));
+				inputs.add(new Input(e.attr("type"), e.attr("value"), e.attr("id")));
 			}
 		}
 		

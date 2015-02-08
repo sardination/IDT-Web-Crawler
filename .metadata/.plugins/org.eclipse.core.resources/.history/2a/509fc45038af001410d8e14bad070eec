@@ -5,11 +5,10 @@ public class Input {
 	private String inputID = "";
 	private String tag = "";
 	
-	public Input (String type, String value, String inputID, String tag) {
+	public Input (String type, String value, String inputID) {
 		this.type = type.toLowerCase();
 		this.value = value;
 		this.inputID = inputID;
-		this.tag = tag;
 	}
 	
 	public String getType() {
@@ -24,7 +23,7 @@ public class Input {
 		return inputID;
 	}
 	
-	public String getTag() {
+	publci String getTag() {
 		return tag;
 	}
 	
