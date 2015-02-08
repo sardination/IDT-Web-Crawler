@@ -48,21 +48,12 @@ public class ButtonEditorLinks extends DefaultCellEditor {
 		if (isPushed) {
 			//
 			//
-<<<<<<< HEAD
 			String[] data = Links.getLinkedData(label);
 			System.out.println(data);
 			int length = 0;
 			for (int i = 0; i < data.length; i++) {
 				System.out.println(Table.data[i][0] + "\t" + data[i]);
 				if (!data[i].equals("")) {
-=======
-			String[] data = getLinkedData(label);
-			//System.out.println(data);
-			int length = 0;
-			for(int i = 0; i < data.length; i++){
-				//System.out.println(Table.data[i][0] + "\t" + data[i]);
-				if(!data[i].equals("")){
->>>>>>> 3071d208932c56dbcadfe1730d3bbf0b6f10c66e
 					length++;
 				}
 			}
@@ -75,7 +66,6 @@ public class ButtonEditorLinks extends DefaultCellEditor {
 				linkTable[count][1] = data[i];
 				count++;
 			}
-<<<<<<< HEAD
 			if (length != 0) {
 				if (Links.current != null)
 					Links.current.dispose();
@@ -86,12 +76,6 @@ public class ButtonEditorLinks extends DefaultCellEditor {
 				new Links(label, Links.lastName);
 			}
 			// System.out.println(label + ": Ouch!");
-=======
-			if(Links.current != null)
-				Links.current.dispose();
-			new Links(linkTable, label);
-			// //System.out.println(label + ": Ouch!");
->>>>>>> 3071d208932c56dbcadfe1730d3bbf0b6f10c66e
 		}
 		isPushed = false;
 		return new String(label);
