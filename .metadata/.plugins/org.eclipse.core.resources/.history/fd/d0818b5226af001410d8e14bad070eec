@@ -61,7 +61,7 @@ public class Page {
 		
 		try {
 			doc = Jsoup.connect(path).get(); //gets all the html information from the page
-			//System.out.println(doc);
+			System.out.println(doc);
 		} catch (IOException e) {
 			//print a notice saying that the link is unreachable 
 			//e.printStackTrace();
