@@ -73,8 +73,10 @@ public class Table extends JFrame implements ActionListener {
 		
 		JTable table = new JTable(dm);
 		table.getColumn("Page").setCellRenderer(new ButtonRenderer());
-		table.getColumn("Page").setCellEditor(
-				new ButtonEditor(new JCheckBox()));
+		table.getColumn("Page").setCellEditor(new ButtonEditor(new JCheckBox()));
+		
+		table.getColumn("Page Name").setCellRenderer(new ButtonRenderer());
+		table.getColumn("Page Name").setCellEditor(new ButtonEditorLinks(new JCheckBox()));
 		
 		//make everything unclickable except for buttons
 		for (int i = 0; i < table.getColumnCount(); i++)

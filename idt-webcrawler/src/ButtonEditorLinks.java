@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class ButtonEditor extends DefaultCellEditor {
+public class ButtonEditorLinks extends DefaultCellEditor {
 	/**
 	 * 
 	 */
@@ -11,7 +11,7 @@ public class ButtonEditor extends DefaultCellEditor {
 	private String label;
 	private boolean isPushed;
 
-	public ButtonEditor(JCheckBox checkBox) {
+	public ButtonEditorLinks(JCheckBox checkBox) {
 		super(checkBox);
 		button = new JButton();
 		button.setOpaque(true);
