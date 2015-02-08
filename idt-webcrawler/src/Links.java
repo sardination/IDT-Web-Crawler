@@ -140,6 +140,10 @@ public class Links extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == goBack){
+			if(lastName == null){
+				this.dispose();
+				return;
+			}
 			System.out.println("HI");
 			String[] data = Links.getLinkedData(lastName);
 			System.out.println(data);
