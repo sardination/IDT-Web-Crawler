@@ -90,15 +90,10 @@ public class Table extends JFrame implements ActionListener {
 		// Add items to JPanel
 		// panel.add(insertURLLabel);
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.weightx = .5;
+		c.weightx = 1;
 		c.gridx = 0;
 		c.gridy = 0;
 		getContentPane().add(instructions, c);
-
-		c.weightx = .5;
-		c.gridx = 1;
-		c.gridy = 0;
-		getContentPane().add(saveFile, c);
 
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;

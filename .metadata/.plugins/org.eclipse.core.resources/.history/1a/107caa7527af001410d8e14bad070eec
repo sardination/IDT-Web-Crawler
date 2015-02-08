@@ -19,6 +19,19 @@ public class Table extends JFrame implements ActionListener {
 	
 	private final JFileChooser fc = new JFileChooser();
 	private final String[] columnNames = { "Page Name", "HTTP Response Code", "Pass/Fail", "Page"};
+	/*private Object[][] data = { { "Calculator", "False", new Button("TEST") },
+			{ "Page2", "True", "WTF", "ButtonTest" }, { "SDGIOSDN", "Im", "insane", "ButtonTest" },
+			{ "Calculator", "False", "Maybe?", "ButtonTest" },
+			{ "Calculator", "False", "Maybe?", "ButtonTest" },
+			{ "Calculator", "False", "Maybe?", "ButtonTest" },
+			{ "Calculator", "False", "Maybe?", "ButtonTest" },
+			{ "Calculator", "False", "Maybe?", "ButtonTest" },
+			{ "Calculator", "False", "Maybe?", "ButtonTest" },
+			{ "Calculator", "False", "Maybe?", "ButtonTest" },
+			{ "Calculator", "False", "Maybe?", "ButtonTest" },
+			{ "Calculator", "False", "Maybe?", "ButtonTest" },
+			{ "Calculator", "False", "Maybe?", "ButtonTest" } };
+			*/
 	private Object[][] data = new Object[0][0];
 
 	private Table frame;
@@ -90,15 +103,10 @@ public class Table extends JFrame implements ActionListener {
 		// Add items to JPanel
 		// panel.add(insertURLLabel);
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.weightx = .5;
+		c.weightx = 1;
 		c.gridx = 0;
 		c.gridy = 0;
 		getContentPane().add(instructions, c);
-
-		c.weightx = .5;
-		c.gridx = 1;
-		c.gridy = 0;
-		getContentPane().add(saveFile, c);
 
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;
