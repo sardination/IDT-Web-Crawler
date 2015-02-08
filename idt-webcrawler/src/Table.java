@@ -80,6 +80,8 @@ public class Table extends JFrame implements ActionListener {
 		
 		table.getColumnModel().getColumn(0).setPreferredWidth(300);
 		
+		table.setRowHeight(30);
+		
 		//make everything unclickable except for buttons
 		for (int i = 0; i < table.getColumnCount(); i++)
 		{
