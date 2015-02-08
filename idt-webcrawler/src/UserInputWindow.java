@@ -17,15 +17,17 @@ public class UserInputWindow extends JFrame implements ActionListener {
 		
 		//Initialize fields
 		doneButton = new JButton("Done!");
+		doneButton.addActionListener(this);
 		wholeWindow = new JPanel();
 		wholeWindow.setLayout(new BoxLayout(wholeWindow, BoxLayout.Y_AXIS));
+		instructions = Page.inputs;
 		
-		//TODO Get user input fields here
-		Input input1 = new Input("String", "Poke", "D:");
+		/*Input input1 = new Input("String", "Poke", "D:");
 		Input input2 = new Input("Checkbox", "100", "?");
 		instructions.add(input1);
-		instructions.add(input2);
+		instructions.add(input2); */
 		
+		//Create instances of input types (ex. create a text field to input text, etc.)
 		JPanel panel = new JPanel();
 		for(int i = 0; i < instructions.size(); i++) {
 			if(instructions.get(i).getType() == "String") {
@@ -44,17 +46,17 @@ public class UserInputWindow extends JFrame implements ActionListener {
 			}
 		}
 		
+		//Showing the window and button.... prob. don't need to change this
 		wholeWindow.add(doneButton);
 		
 		Container con = this.getContentPane();
 		con.add(wholeWindow);
 		setVisible(true);
-		
-		doneButton.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		//get inputted info
 		for(int i = 0; i < instructions.size(); i++) {
 			if(instructions.get(i).getType() == "String") {
 				
@@ -63,10 +65,6 @@ public class UserInputWindow extends JFrame implements ActionListener {
 			}
 		}
 		
-	}
-	
-	public static void main(String[] args) {
-		new UserInputWindow();
 	}
 
 }
