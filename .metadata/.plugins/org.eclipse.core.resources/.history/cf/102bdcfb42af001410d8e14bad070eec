@@ -27,24 +27,28 @@ public class Table extends JFrame implements ActionListener {
 
 	private Table frame;
 	private JPanel panel;
+	private JButton saveChanges;
 	private JScrollPane table;
 	private JTable info;
 	private JButton saveFile;
 	public static RecursiveParser rp;
+	private File oldV;
 
 	// private static JTextArea area;
 	// private static JScrollPane pane;
 
-	public Table(RecursiveParser rp) {
+	public Table(File oldV, RecursiveParser rp) {
 		super("Web Crawler Application");
 		setBounds(100, 100, 800, 200);
 		setLayout(new GridBagLayout());
 
 		this.rp = rp;
+		this.oldV = oldV;
 		listsToArray();
 		
 		// Initialize fields
 		panel = new JPanel();
+		saveChanges = new JButton("Save Version Changes Report");
 		info = new JTable(data, columnNames);
 		table = new JScrollPane(info);
 		saveFile = new JButton("Save Version Report");
@@ -101,7 +105,10 @@ public class Table extends JFrame implements ActionListener {
 		c.weightx = .5;
 		c.gridx = 0;
 		c.gridy = 0;
-		
+		if (oldV != null) {
+			getContentPane().add(saveChanges, c);
+		}
+
 		c.weightx = .5;
 		c.gridx = 1;
 		c.gridy = 0;
@@ -178,6 +185,12 @@ public class Table extends JFrame implements ActionListener {
 				File file = fc.getSelectedFile();
 				writeVersionReport(fc.getSelectedFile().getAbsolutePath());
 			}
+		} else if (e.getSource() == saveChanges) {
+			int returnVal = fc.showSaveDialog(Table.this);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				writeVersionChangesReport(fc.getSelectedFile().getAbsolutePath());
+			}
 		}
 	}
 
@@ -192,16 +205,19 @@ public class Table extends JFrame implements ActionListener {
 		toWrite = toWrite.concat("\n,Linked Pages");
 		String str;
 		for (int i = 0; i < linkedPages.size(); i++) {
-			str = linkedPages.get(i).getResponseCode() + ","
+			// TODO Edit linkedPages.get(i).toString() in next line
+			str = linkedPages.get(i).toString() + ","
 					+ linkedPages.get(i).getPathName();
 			toWrite = toWrite.concat("\t" + str);
 		}
 		toWrite = toWrite.concat("\n, Input Values Test");
 		for (int j = 0; j < inputValues.size(); j++) {
+			// TODO Edit inputValues.get(j).toString() in next line
 			str = inputValues.get(j).getTag() + ","
-					+ inputValues.get(j).toString();
+					+ inputValues.get(j).getID();
 			toWrite = toWrite.concat("\t" + str);
 		}
+		// System.out.print(toWrite);
 		outputToFile(toWrite,name);
 	}
 	

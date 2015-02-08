@@ -27,24 +27,28 @@ public class Table extends JFrame implements ActionListener {
 
 	private Table frame;
 	private JPanel panel;
+	private JButton saveChanges;
 	private JScrollPane table;
 	private JTable info;
 	private JButton saveFile;
 	public static RecursiveParser rp;
+	private File oldV;
 
 	// private static JTextArea area;
 	// private static JScrollPane pane;
 
-	public Table(RecursiveParser rp) {
+	public Table(File oldV, RecursiveParser rp) {
 		super("Web Crawler Application");
 		setBounds(100, 100, 800, 200);
 		setLayout(new GridBagLayout());
 
 		this.rp = rp;
+		this.oldV = oldV;
 		listsToArray();
 		
 		// Initialize fields
 		panel = new JPanel();
+		saveChanges = new JButton("Save Version Changes Report");
 		info = new JTable(data, columnNames);
 		table = new JScrollPane(info);
 		saveFile = new JButton("Save Version Report");
@@ -101,7 +105,8 @@ public class Table extends JFrame implements ActionListener {
 		c.weightx = .5;
 		c.gridx = 0;
 		c.gridy = 0;
-		
+		getContentPane().add(saveChanges, c);
+
 		c.weightx = .5;
 		c.gridx = 1;
 		c.gridy = 0;
@@ -178,34 +183,12 @@ public class Table extends JFrame implements ActionListener {
 				File file = fc.getSelectedFile();
 				writeVersionReport(fc.getSelectedFile().getAbsolutePath());
 			}
+		} else if (e.getSource() == saveChanges) {
+			//int
 		}
 	}
 
 	public void writeVersionReport(String name) {
-		String toWrite;
-		// TODO Get info for these variables!!!!!!!!!!!!!!!!!!!!
-		String pagePath = "path";
-		ArrayList<Page> linkedPages = null;
-		ArrayList<Input> inputValues = null;
-		// TODO Get info for these variables!!!!!!!!!!!!!!!!!!!!
-		toWrite = pagePath;
-		toWrite = toWrite.concat("\n,Linked Pages");
-		String str;
-		for (int i = 0; i < linkedPages.size(); i++) {
-			str = linkedPages.get(i).getResponseCode() + ","
-					+ linkedPages.get(i).getPathName();
-			toWrite = toWrite.concat("\t" + str);
-		}
-		toWrite = toWrite.concat("\n, Input Values Test");
-		for (int j = 0; j < inputValues.size(); j++) {
-			str = inputValues.get(j).getTag() + ","
-					+ inputValues.get(j).toString();
-			toWrite = toWrite.concat("\t" + str);
-		}
-		outputToFile(toWrite,name);
-	}
-	
-	public void writeVersionChangesReport(String name) {
 		String toWrite;
 		// TODO Get info for these variables!!!!!!!!!!!!!!!!!!!!
 		String pagePath = "path";

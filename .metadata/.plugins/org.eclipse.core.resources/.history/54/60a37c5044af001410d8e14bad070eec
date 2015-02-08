@@ -87,7 +87,7 @@ public class WebCrawler extends JFrame implements ActionListener {
 		RecursiveParser parser = new RecursiveParser(insertURLField.getText());
 		parser.parseNow();
 		if (parser.nodes.size()!=0) {
-			new Table(parser);
+			new Table(oldVFile,parser);
 			this.dispose();
 		}
 	}

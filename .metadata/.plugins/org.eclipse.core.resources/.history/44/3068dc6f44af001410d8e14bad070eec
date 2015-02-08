@@ -178,6 +178,12 @@ public class Table extends JFrame implements ActionListener {
 				File file = fc.getSelectedFile();
 				writeVersionReport(fc.getSelectedFile().getAbsolutePath());
 			}
+		} else if (e.getSource() == saveChanges) {
+			int returnVal = fc.showSaveDialog(Table.this);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				writeVersionChangesReport(fc.getSelectedFile().getAbsolutePath());
+			}
 		}
 	}
 
