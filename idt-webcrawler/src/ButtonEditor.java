@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
 public class ButtonEditor extends DefaultCellEditor {
@@ -10,6 +11,8 @@ public class ButtonEditor extends DefaultCellEditor {
 	protected JButton button;
 	private String label;
 	private boolean isPushed;
+	private String name;
+	private Page page;
 
 	public ButtonEditor(JCheckBox checkBox) {
 		super(checkBox);
@@ -33,15 +36,27 @@ public class ButtonEditor extends DefaultCellEditor {
 		}
 		label = (value == null) ? "" : value.toString();
 		button.setText(label);
+		name = (String) table.getValueAt(row, 0);
+		page = getPage();
 		isPushed = true;
 		return button;
+	}
+
+	private Page getPage() {
+		for (int i = 0; i < Table.data.length; i++) {
+			if (name.equals(Table.data[i][0])) {
+				return Table.rp.nodes.get(i);
+			}
+		}
+		return null;
 	}
 
 	public Object getCellEditorValue() {
 		if (isPushed) {
 			//
 			//
-			new UserInputWindow();
+			new UserInputWindow(page);
+			System.out.println(page.getPathName());
 			// System.out.println(label + ": Ouch!");
 		}
 		isPushed = false;
