@@ -217,7 +217,7 @@ public class Table extends JFrame implements ActionListener {
 			}
 			toWrite += ",Input Values Test\n";
 			for (int j=0; j<rp.nodes.get(i).inputs.size(); j++) {
-				toWrite += ","+rp.nodes.get(i).inputs.get(j).getTag()+",Correct Input?"+rp.nodes.get(i).inputs.get(j).getPass();
+				toWrite += ","+rp.nodes.get(i).inputs.get(j).getTag();
 			}
 		}
 		
