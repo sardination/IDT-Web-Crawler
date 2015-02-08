@@ -76,9 +76,9 @@ public class Page {
 			for (Element e:inputTags) {
 				System.out.println(e.attr("value"));
 				if(e.attr("type").equals("text"))
-					inputs.add(new Input(e.attr("type"), e.attr("name"), e.attr("id"), e.toString()));
+					inputs.add(new Input(e.attr("type"), e.attr("name"), e.attr("id"), e.tag().toString()));
 				else
-					inputs.add(new Input(e.attr("type"), e.attr("value"), e.attr("id"), e.toString()));
+					inputs.add(new Input(e.attr("type"), e.attr("value"), e.attr("id"), e.tag().toString()));
 			}
 		}
 		
