@@ -3,6 +3,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -76,6 +78,49 @@ public class Page {
 		}
 		
 		//for (Input i:inputs) System.out.println(i);
+	}
+	
+		/**
+	 * tests Website by comparing the output on correct input and the output on test input
+	 * @param correct an array of correct inputs (order must be identical)
+	 * @param test an array of test inputs
+	 * @return <CODE>true</CODE> if the pages are identical, <CODE>false</CODE> if otherwise
+	 */
+	public boolean testInput(String[] correct, String[] test) {
+		HashMap<String,String> cormap = new HashMap<String,String>();
+		boolean[] pass = new boolean[inputs.size()];
+		for (int x=0; x<inputs.size(); x++) {
+			cormap.put(inputs.get(x).getID(), correct[x]);
+		}
+		try {
+			Document cordoc = Jsoup.connect(path).data(cormap).userAgent("Mozilla").post();
+			HashMap<String,String> testmap = new HashMap<String,String>();
+			for (int x=0; x<inputs.size(); x++) {
+				testmap.put(inputs.get(x).getID(), test[x]);
+			}
+			Document testdoc = Jsoup.connect(path).data(testmap).userAgent("Mozilla").post();
+			return cordoc.equals(testdoc);
+		}
+		catch (IOException e) {
+			return false;
+		}
+	}
+
+	/**
+	 * tests Website by comparing the output on correct input and the output on test input
+	 * @param correct an array of correct inputs 
+	 * @param test an array of test inputs
+	 * @return <CODE>true</CODE> if the pages are identical, <CODE>false</CODE> if otherwise
+	 */
+	public boolean testInput(Map<String,String> correct, Map<String,String> test) {
+		try {
+			Document cordoc = Jsoup.connect(path).data(correct).userAgent("Mozilla").post();
+			Document testdoc = Jsoup.connect(path).data(test).userAgent("Mozilla").post();
+			return cordoc.equals(testdoc);
+		}
+		catch (IOException e) {
+			return false;
+		}
 	}
 	
 	public String toString() {
