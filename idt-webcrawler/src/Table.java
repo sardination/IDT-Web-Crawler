@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 public class Table extends JFrame implements ActionListener {
 	
 	private final JFileChooser fc = new JFileChooser();
-	private final String[] columnNames = { "Page Name", "HTTP Response Code", "Pass/Fail", "Page"};
+	private final String[] columnNames = { "Page Name (Click to view links)", "HTTP Response Code", "Pass/Fail", "Page"};
 	public static Object[][] data = new Object[0][0];
 	public static String[][] tagsGraph = new String[0][0];
 
@@ -75,8 +75,8 @@ public class Table extends JFrame implements ActionListener {
 		table.getColumn("Page").setCellRenderer(new ButtonRenderer());
 		table.getColumn("Page").setCellEditor(new ButtonEditor(new JCheckBox()));
 		
-		table.getColumn("Page Name").setCellRenderer(new ButtonRenderer());
-		table.getColumn("Page Name").setCellEditor(new ButtonEditorLinks(new JCheckBox()));
+		table.getColumn("Page Name (Click to view links)").setCellRenderer(new ButtonRenderer());
+		table.getColumn("Page Name (Click to view links)").setCellEditor(new ButtonEditorLinks(new JCheckBox()));
 		
 		table.getColumnModel().getColumn(0).setPreferredWidth(300);
 		

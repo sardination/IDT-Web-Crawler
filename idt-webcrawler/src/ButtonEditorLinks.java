@@ -48,40 +48,37 @@ public class ButtonEditorLinks extends DefaultCellEditor {
 		if (isPushed) {
 			//
 			//
-			String[] data = getLinkedData(label);
+			String[] data = Links.getLinkedData(label);
 			System.out.println(data);
 			int length = 0;
-			for(int i = 0; i < data.length; i++){
+			for (int i = 0; i < data.length; i++) {
 				System.out.println(Table.data[i][0] + "\t" + data[i]);
-				if(!data[i].equals("")){
+				if (!data[i].equals("")) {
 					length++;
 				}
 			}
 			String[][] linkTable = new String[length][2];
 			int count = 0;
-			for(int i = 0; i < data.length; i++){
-				if(data[i].equals(""))
+			for (int i = 0; i < data.length; i++) {
+				if (data[i].equals(""))
 					continue;
-				linkTable[count][0] = (String)Table.data[i][0];
+				linkTable[count][0] = (String) Table.data[i][0];
 				linkTable[count][1] = data[i];
 				count++;
 			}
-			if(Links.current != null)
-				Links.current.dispose();
-			new Links(linkTable, label);
+			if (length != 0) {
+				if (Links.current != null)
+					Links.current.dispose();
+				new Links(linkTable, label);
+			}else{
+				if (Links.current != null)
+					Links.current.dispose();
+				new Links(label, Links.lastName);
+			}
 			// System.out.println(label + ": Ouch!");
 		}
 		isPushed = false;
 		return new String(label);
-	}
-	
-	private String[] getLinkedData(String name){
-		for(int i = 0; i < Table.data.length; i++){
-			if(Table.data[i][0].equals(name)){
-				return Table.tagsGraph[i];
-			}
-		}
-		return null;
 	}
 
 	public boolean stopCellEditing() {
