@@ -179,7 +179,7 @@ public class Table extends JFrame implements ActionListener {
 			int returnVal = fc.showSaveDialog(Table.this);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
-				writeFile(fc.getSelectedFile().getAbsolutePath());
+				writeFile();
 			}
 		}
 	}
