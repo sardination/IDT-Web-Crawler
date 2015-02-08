@@ -108,8 +108,8 @@ public class Page {
 
 	/**
 	 * tests Website by comparing the output on correct input and the output on test input
-	 * @param correct an array of correct inputs 
-	 * @param test an array of test inputs
+	 * @param correct a Map of correct inputs 
+	 * @param test an Map of test inputs
 	 * @return <CODE>true</CODE> if the pages are identical, <CODE>false</CODE> if otherwise
 	 */
 	public boolean testInput(Map<String,String> correct, Map<String,String> test) {
