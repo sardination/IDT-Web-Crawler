@@ -131,8 +131,8 @@ public class Table extends JFrame implements ActionListener {
 		for (int i=0; i<rp.nodes.size(); i++) {
 			data[i][0] = rp.nodes.get(i).getPathName();
 			data[i][1] = rp.nodes.get(i).getResponseCode();
-			if (String.valueOf(rp.nodes.get(i).getResponseCode()).substring(0,1).equals("4") 
-					|| String.valueOf(rp.nodes.get(i).getResponseCode()).substring(0,1).equals("5")) {
+			if (String.valueOf(rp.nodes.get(i).getResponseCode()).substring(0,1)=="4" 
+					|| String.valueOf(rp.nodes.get(i).getResponseCode()).substring(0,1)=="5") {
 				data[i][2] = "Fail";
 			} else {
 				data[i][2] = "Pass";
