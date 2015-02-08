@@ -104,8 +104,8 @@ public class UserInputWindow extends JFrame implements ActionListener {
 		//Initialize fields
 		this.correct = correct;
 		this.page = page;
-		correctButton = new JButton("Test Input Values");
-		correctButton.addActionListener(this);
+		testButton = new JButton("Test Input Values");
+		testButton.addActionListener(this);
 		wholeWindow = new JPanel();
 		wholeWindow.setLayout(new BoxLayout(wholeWindow, BoxLayout.Y_AXIS));
 		instructions = page.getInputs();
@@ -171,7 +171,7 @@ public class UserInputWindow extends JFrame implements ActionListener {
 		wholeWindow.add(pane, c);
 		//Showing the window and button.... prob. don't need to change this
 		c.gridy = 1;
-		wholeWindow.add(correctButton, c);
+		wholeWindow.add(testButton, c);
 		
 		Container con = this.getContentPane();
 		con.add(wholeWindow);
@@ -205,6 +205,7 @@ public class UserInputWindow extends JFrame implements ActionListener {
 		}
 		
 		if(arg0.getSource() == testButton){
+			System.out.println("HI");
 			String[] testTemp = new String[inputs.size()];
 			for(int i = 0; i < inputs.size(); i++){
 				try{
@@ -216,7 +217,10 @@ public class UserInputWindow extends JFrame implements ActionListener {
 					testTemp[i] = (String)((JTextComponent) inputs.get(i)).getText();
 				}
 			}
-			System.out.println(this.page.testInput(this.correct, testTemp));
+			boolean yesno = this.page.testInput(correct, testTemp);
+			ArrayList<Input> test = this.page.getInputs();
+			for(Input i : test)
+				i.setPass(yesno);
 		}
 		
 		
