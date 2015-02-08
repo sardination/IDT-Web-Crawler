@@ -33,7 +33,7 @@ public class Links extends JFrame implements ActionListener {
 	public Links(String[][] data, String name) {
 		super("Links");
 		current = this;
-		setBounds(100, 100, 800, 200);
+		setBounds(200, 200, 800, 200);
 		setLayout(new GridBagLayout());
 		
 		// Initialize fields
