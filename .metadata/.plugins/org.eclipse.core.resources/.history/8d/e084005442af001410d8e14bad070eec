@@ -31,7 +31,7 @@ public class Table extends JFrame implements ActionListener {
 	private JScrollPane table;
 	private JTable info;
 	private JButton saveFile;
-	public static RecursiveParser rp;
+	private static RecursiveParser rp;
 	private File oldV;
 
 	// private static JTextArea area;
@@ -181,14 +181,12 @@ public class Table extends JFrame implements ActionListener {
 			int returnVal = fc.showSaveDialog(Table.this);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
-				writeVersionReport(fc.getSelectedFile().getAbsolutePath());
+				writeFile(fc.getSelectedFile().getAbsolutePath());
 			}
-		} else if (e.getSource() == saveChanges) {
-			//int
 		}
 	}
 
-	public void writeVersionReport(String name) {
+	public void writeFile(String name) {
 		String toWrite;
 		// TODO Get info for these variables!!!!!!!!!!!!!!!!!!!!
 		String pagePath = "path";
