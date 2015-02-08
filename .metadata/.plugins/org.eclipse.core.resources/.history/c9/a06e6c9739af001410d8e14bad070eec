@@ -16,7 +16,7 @@ public class UserInputWindow extends JFrame implements ActionListener {
 		setBounds(0, 0, 500, 600);
 		
 		//Initialize fields
-		doneButton = new JButton("Test These Input Values");
+		doneButton = new JButton("Done!");
 		doneButton.addActionListener(this);
 		wholeWindow = new JPanel();
 		wholeWindow.setLayout(new BoxLayout(wholeWindow, BoxLayout.Y_AXIS));
@@ -44,10 +44,7 @@ public class UserInputWindow extends JFrame implements ActionListener {
 				wholeWindow.add(panel);
 				panel = null;
 			} else if (instructions.get(i).getType().equals("submit") || instructions.get(i).getType().equals("button")) {
-				JCheckBox checkbox = new JCheckBox("Click "+instructions.get(i).getValue()+" button.");
-				panel = new JPanel();
-				panel.add(checkbox);
-				wholeWindow.add(panel);
+				//auto click button and see if there are changes
 			} else if (instructions.get(i).getType().equals("radio")) {
 				JRadioButton radio = new JRadioButton(instructions.get(i).getValue());
 				panel = new JPanel();
@@ -75,8 +72,6 @@ public class UserInputWindow extends JFrame implements ActionListener {
 				
 			}
 		}
-		if(arg0.getSource() == doneButton)
-			this.dispose();
 		
 	}
 

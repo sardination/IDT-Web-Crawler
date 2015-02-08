@@ -16,7 +16,7 @@ public class UserInputWindow extends JFrame implements ActionListener {
 		setBounds(0, 0, 500, 600);
 		
 		//Initialize fields
-		doneButton = new JButton("Test These Input Values");
+		doneButton = new JButton("Done!");
 		doneButton.addActionListener(this);
 		wholeWindow = new JPanel();
 		wholeWindow.setLayout(new BoxLayout(wholeWindow, BoxLayout.Y_AXIS));
