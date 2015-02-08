@@ -17,7 +17,7 @@ public class Page {
 	private String path;
 	//private ArrayList<Page> route = new ArrayList<Page>();
 	private int responseCode;
-	public static ArrayList<Input> inputs = new ArrayList<Input>();
+	public ArrayList<Input> inputs = new ArrayList<Input>();
 	
 	public Page (String pathName) {
 		this.path = pathName;
@@ -27,6 +27,7 @@ public class Page {
 			con = (HttpURLConnection) new URL(path).openConnection();
 	 	      con.setRequestMethod("HEAD");
 	 	     responseCode = con.getResponseCode();
+	 	     parseInputs();
 		} catch (MalformedURLException e) {
 			responseCode = -1;
 			//e.printStackTrace();
@@ -73,7 +74,11 @@ public class Page {
 		if (go) {
 			Elements inputTags = doc.select("input");
 			for (Element e:inputTags) {
-				inputs.add(new Input(e.attr("type"), e.attr("value"), e.attr("id"), e.tag().toString()));
+				System.out.println(e.attr("value"));
+				if(e.attr("type").equals("text"))
+					inputs.add(new Input(e.attr("type"), e.attr("name"), e.attr("id"), e.tag().toString()));
+				else
+					inputs.add(new Input(e.attr("type"), e.attr("value"), e.attr("id"), e.tag().toString()));
 			}
 		}
 		

@@ -1,7 +1,6 @@
 import javax.swing.*;
 
 import java.awt.*;
-import java.awt.Container;
 import java.awt.event.*;
 import java.util.ArrayList;
 
@@ -14,6 +13,7 @@ public class UserInputWindow extends JFrame implements ActionListener {
 	public UserInputWindow(Page page) {
 		super("Input Fields");
 		setBounds(0, 0, 500, 600);
+		setLayout(new GridBagLayout());
 		
 		//Initialize fields
 		doneButton = new JButton("Test These Input Values");
@@ -26,39 +26,58 @@ public class UserInputWindow extends JFrame implements ActionListener {
 		Input input2 = new Input("Checkbox", "100", "?");
 		instructions.add(input1);
 		instructions.add(input2); */
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 1;
+		c.gridwidth = 2;
+		c.gridx = 0;
+		c.gridy = 0;
 		
 		//Create instances of input types (ex. create a text field to input text, etc.)
 		JPanel panel = new JPanel();
-		for(int i = 0; i < instructions.size(); i++) {
+		panel.setLayout(new GridBagLayout());
+		int i = 0;
+		for(i = 0; i < instructions.size(); i++) {
+			c.gridy = i;
 			if(instructions.get(i).getType().equals("text") || instructions.get(i).getType().equals("password")) {
 				JLabel label = new JLabel(instructions.get(i).getValue());
 				JTextField field = new JTextField(20);
-				panel.add(label); 
-				panel.add(field);
-				wholeWindow.add(panel);
-				panel = null;
+				System.out.println(label.getText());
+				c.gridwidth = 1;
+				panel.add(label, c);
+				
+				c.gridx = 1;
+				panel.add(field, c);
+				
+				c.gridwidth = 2;
+				c.gridx = 0;
+				//wholeWindow.add(panel);
+				//panel = null;
 			} else if(instructions.get(i).getType().equals("checkbox")) {
 				JCheckBox checkbox = new JCheckBox(instructions.get(i).getValue());
 				panel = new JPanel();
-				panel.add(checkbox);
-				wholeWindow.add(panel);
-				panel = null;
+				panel.add(checkbox, c);
+				//wholeWindow.add(panel);
+				//panel = null;
 			} else if (instructions.get(i).getType().equals("submit") || instructions.get(i).getType().equals("button")) {
 				JCheckBox checkbox = new JCheckBox("Click "+instructions.get(i).getValue()+" button.");
-				panel = new JPanel();
-				panel.add(checkbox);
-				wholeWindow.add(panel);
+				//panel = new JPanel();
+				panel.add(checkbox, c);
+				//wholeWindow.add(panel);
 			} else if (instructions.get(i).getType().equals("radio")) {
 				JRadioButton radio = new JRadioButton(instructions.get(i).getValue());
-				panel = new JPanel();
-				panel.add(radio);
-				wholeWindow.add(panel);
-				panel = null;
+				//panel = new JPanel();
+				panel.add(radio, c);
+				//wholeWindow.add(panel);
+				//panel = null;
 			}
 		}
-		
+		c.gridy = 0;
+		JScrollPane pane = new JScrollPane(panel);
+		wholeWindow.add(pane, c);
 		//Showing the window and button.... prob. don't need to change this
-		wholeWindow.add(doneButton);
+		c.gridy = 1;
+		wholeWindow.add(doneButton, c);
 		
 		Container con = this.getContentPane();
 		con.add(wholeWindow);
