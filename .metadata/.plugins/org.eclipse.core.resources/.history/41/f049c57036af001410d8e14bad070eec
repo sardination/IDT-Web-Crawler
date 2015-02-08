@@ -49,10 +49,10 @@ public class ButtonEditorLinks extends DefaultCellEditor {
 			//
 			//
 			String[] data = getLinkedData(label);
-			//System.out.println(data);
+			System.out.println(data);
 			int length = 0;
 			for(int i = 0; i < data.length; i++){
-				//System.out.println(Table.data[i][0] + "\t" + data[i]);
+				System.out.println(Table.data[i][0] + "\t" + data[i]);
 				if(!data[i].equals("")){
 					length++;
 				}
@@ -69,7 +69,7 @@ public class ButtonEditorLinks extends DefaultCellEditor {
 			if(Links.current != null)
 				Links.current.dispose();
 			new Links(linkTable, label);
-			// //System.out.println(label + ": Ouch!");
+			// System.out.println(label + ": Ouch!");
 		}
 		isPushed = false;
 		return new String(label);
